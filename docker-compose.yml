@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  glpi:
+    build:
+      context: ./main/
+      args:
+        - PATH_CONF_STORE=/etc/glpi
+        - PATH_DATA_STORE=/var/lib/glpi
+        - PATH_LOG_STORE=/var/log/glpi
+    ports:
+      - '5000:80'
+    depends_on:
+      - glpi-db
+    networks:
+      glpi-net:
+        ipv4_address: 172.16.1.3
+    container_name: glpi
+    volumes:
+      - /home/jytaloramon/Development/glpi-deploy/glpi-storage/config:/etc/glpi
+      - /home/jytaloramon/Development/glpi-deploy/glpi-storage/data:/var/lib/glpi
+      - /home/jytaloramon/Development/glpi-deploy/glpi-storage/log:/var/log/glpi
+
+  glpi-db:
+    image: mariadb:10.8.3
+    ports:
+      - '127.0.0.1:3306:3306'
+    env_file:
+      - ./database/.env
+    networks:
+      glpi-net:
+        ipv4_address: 172.16.1.2
+    container_name: glpi-db
+    volumes:
+      - /home/jytaloramon/Development/glpi-deploy/glpi-storage/database:/var/lib/mysql
+
+networks:
+  glpi-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: '172.16.1.0/24'
