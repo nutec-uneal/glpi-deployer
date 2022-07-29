@@ -26,7 +26,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 COPY glpi/ /var/www/html
 
 RUN mkdir -p /var/spool/cron/crontabs/
-COPY config/utils/cron-root /var/spool/cron/crontabs/root
+COPY configs/utils/cron-root /var/spool/cron/crontabs/root
 
 RUN mkdir $PATH_DATA_STORE
 RUN mkdir $PATH_CONF_STORE
@@ -35,8 +35,8 @@ RUN mkdir $PATH_LOG_STORE
 RUN chown -R www-data:www-data /var/www/html/config
 RUN chown -R www-data:www-data /var/www/html/marketplace
 
-COPY config/php/downstream.php /var/www/html/inc
-COPY config/php/.htaccess /var/www/html/install
+COPY configs/php/downstream.php /var/www/html/inc
+COPY configs/php/.htaccess /var/www/html/install
 
 WORKDIR /var/www/html
 
