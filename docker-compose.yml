@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   glpi:
@@ -9,7 +9,7 @@ services:
         - PATH_DATA_STORE=/var/lib/glpi
         - PATH_LOG_STORE=/var/log/glpi
     ports:
-      - '5000:80'
+      - "5000:80"
     depends_on:
       - glpi-db
     networks:
@@ -24,7 +24,7 @@ services:
   glpi-db:
     image: mariadb:10.8.3
     ports:
-      - '127.0.0.1:3306:3306'
+      - "127.0.0.1:3306:3306"
     env_file:
       - ./database/.env
     networks:
@@ -39,4 +39,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: '172.16.1.0/24'
+        - subnet: "172.16.1.0/24"
