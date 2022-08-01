@@ -40,4 +40,4 @@ COPY configs/php/.htaccess /var/www/html/install
 
 WORKDIR /var/www/html
 
-CMD ["cron", "-f"]
+CMD ["cron"]
