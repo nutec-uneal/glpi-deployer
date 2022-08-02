@@ -10,23 +10,21 @@ RUN apt-get update
 
 RUN apt-get upgrade -y
 
-RUN apt-get install nano cron -y
+RUN apt-get install nano -y
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
     /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions gd xdebug mysqli intl
+# EXTENSIONS
+RUN chmod +x /usr/local/bin/install-php-extensions
 
-# Optional extensions
-# RUN install-php-extensions ldap xmlrpc apcu
-# cli domxlm openssl (find external)
+# Required
+RUN install-php-extensions gd xdebug mysqli intl
+# Optional 
+RUN install-php-extensions ldap xmlrpc apcu exif bz2 zip opcache 
 
 # Before: extract glpi-{version}.tgz
 COPY glpi/ /var/www/html
-
-RUN mkdir -p /var/spool/cron/crontabs/
-COPY configs/utils/cron-root /var/spool/cron/crontabs/root
 
 RUN mkdir $PATH_DATA_STORE
 RUN mkdir $PATH_CONF_STORE
@@ -39,5 +37,3 @@ COPY configs/php/downstream.php /var/www/html/inc
 COPY configs/php/.htaccess /var/www/html/install
 
 WORKDIR /var/www/html
-
-CMD ["cron"]
