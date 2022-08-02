@@ -16,12 +16,12 @@ services:
       glpi-net:
         ipv4_address: 172.16.1.3
     restart: always
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:5000" ]
-      interval: 3m
-      timeout: 30s
-      retries: 5
-      start_period: 30s
+    #healthcheck:
+    #  test: [ "CMD", "curl", "-f", "http://localhost:5000" ]
+    #  interval: 3m
+    #  timeout: 30s
+    #  retries: 5
+    #  start_period: 30s
     container_name: glpi
     volumes:
       - ~/glpi-storage/config:/etc/glpi
@@ -38,22 +38,22 @@ services:
       glpi-net:
         ipv4_address: 172.16.1.2
     restart: always
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "127.0.0.1",
-          "-u",
-          "root",
-          "--password=$$MARIADB_ROOT_PASSWORD"
-        ]
-      interval: 3m
-      timeout: 30s
-      retries: 5
-      start_period: 30s
+    #healthcheck:
+    #  test:
+    #    [
+    #      "CMD",
+    #      "mysqladmin",
+    #      "ping",
+    #      "-h",
+    #      "127.0.0.1",
+    #      "-u",
+    #      "root",
+    #      "--password=$$MARIADB_ROOT_PASSWORD"
+    #    ]
+    #  interval: 3m
+    #  timeout: 30s
+    #  retries: 5
+    #  start_period: 30s
     container_name: glpi-db
     volumes:
       - ~/glpi-storage/database:/var/lib/mysql
