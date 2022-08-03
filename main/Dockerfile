@@ -10,7 +10,7 @@ RUN apt-get update
 
 RUN apt-get upgrade -y
 
-RUN apt-get install nano cron -y
+RUN apt-get install nano cron supervisor -y
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
     /usr/local/bin/
@@ -26,8 +26,12 @@ RUN install-php-extensions ldap xmlrpc apcu exif bz2 zip opcache
 # Before: extract glpi-{version}.tgz
 COPY glpi/ /var/www/html
 
-RUN mkdir -p /var/spool/cron/crontabs/
-COPY configs/utils/cron-root /var/spool/cron/crontabs/root
+RUN mkdir -p /var/log/supervisor
+COPY configs/utils/supervisord.conf /etc/supervisord.conf
+
+COPY configs/utils/cron-task /etc/cron.d/cron-task
+RUN chmod 600 /etc/cron.d/cron-task
+RUN crontab /etc/cron.d/cron-task
 
 RUN mkdir $PATH_DATA_STORE
 RUN mkdir $PATH_CONF_STORE
@@ -41,4 +45,4 @@ COPY configs/php/.htaccess /var/www/html/install
 
 WORKDIR /var/www/html
 
-#CMD [ "cron", "-f" ]
+CMD ["/usr/bin/supervisord"]
