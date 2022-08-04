@@ -1,5 +1,51 @@
 # GLPI Deploy
 
+## Pré-instalação (Requisitos)
+
+### Downloads
+
+#### GLPI-Deploy
+- ```bash
+  # Clone o repositório do projeto.
+  # 1. Clicando na botão download no site.
+  # 2. Executando o comando abaixo (Necessário autenticação).
+
+  $ git clone https://github.com/nutecuneal/glpi-deploy.git
+  ```
+
+#### Docker:
+  - Docker é um plataforma que usa virtualização a nível de aplicação/"Sistema Operacinal" para entregar softwares empacotados, chamados de containers.
+  - [Docker: Guia de Uso e instalação](https://docs.docker.com/desktop/).
+#### GLPI:
+  - Software de gerenciamento de serviços.
+  - [GLPI Website](http://glpi-project.org/) (para baixar versão atual).
+  - [Repositório do Github](https://github.com/glpi-project/glpi/releases ) (Todas as versões - Recomendado).
+  - Versões Testadas: 10.0.2.
+
+### Preparação
+
+#### Docker:
+- Certifique-se que a aplicação está executando.
+- ```bash
+  # Em algumas distribuições Linux.
+
+  # Para verificar se o Docker está executando.
+  $ sudo systemctl status docker.service
+  
+  # Para iniciar o Docker (caso necessário).
+  $ sudo systemctl start docker.service
+
+  # Para fazer o Docker iniciar junto com o Sistema Operacinal.
+  $ sudo systemctl enable docker.service  
+  ```
+
+#### GLPI:
+- Extraia o arquivo *glpi-{version}.tgz*. Copie a pasta extraída para dentro de "*path1*/glpi-deploy/main". Onde *path1* é o caminho para pasta *glpi-deploy*.
+
+## Primeira Instalação
+
+# Intalação com backup (Migração/Restauração)
+
 wget https://github.com/glpi-project/glpi/releases/download/10.0.2/glpi-10.0.2.tgz
 
 mkdir glpi-storage
