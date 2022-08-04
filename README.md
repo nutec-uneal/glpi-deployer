@@ -9,12 +9,13 @@
   # Clone o repositório do projeto.
   # 1. Clicando na botão download no site.
   # 2. Executando o comando abaixo (Necessário autenticação).
+  # 3. Para essa autenticação você pode usar token.
 
   $ git clone https://github.com/nutecuneal/glpi-deploy.git
   ```
 
 #### Docker:
-  - Docker é um plataforma que usa virtualização a nível de aplicação/"Sistema Operacinal" para entregar softwares empacotados, chamados de containers.
+  - Docker é um plataforma que usa virtualização a nível de aplicação/"Sistema Operacional" para entregar softwares empacotados, chamados de containers.
   - [Docker: Guia de Uso e instalação](https://docs.docker.com/desktop/).
 #### GLPI:
   - Software de gerenciamento de serviços.
@@ -35,7 +36,7 @@
   # Para iniciar o Docker (caso necessário).
   $ sudo systemctl start docker.service
 
-  # Para fazer o Docker iniciar junto com o Sistema Operacinal.
+  # Para fazer o Docker iniciar junto com o Sistema Operacional.
   $ sudo systemctl enable docker.service  
   ```
 
