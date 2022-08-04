@@ -54,7 +54,6 @@ $ cd $path1/glpi-deploy
 ### Criação de Diretórios
 
 ```bash
-
 $ mkdir $path2/$glpistorage
 $ mkdir $path2/$glpistorage/{config,data,log,database}
 $ mkdir $path2/$glpistorage/data/{_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads,_cache}
@@ -150,29 +149,10 @@ Agora, em seu navegador acesse "localhost:portaGLPI" ou "ip:portaGLPI". Faça a 
 Depois de concluído o processo de instalação, execute:
 
 ```bash
-
 $ mv /var/www/html/install/.htaccess$ /var/www/html/install/.htaccess
 ```
 
 # Intalação com backup (Migração/Restauração)
-
-wget https://github.com/glpi-project/glpi/releases/download/10.0.2/glpi-10.0.2.tgz
-
-mkdir glpi-storage
-mkdir glpi-storage/{config,data,log,database}
-mkdir glpi-storage/data/{_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads,_cache}
-
-cp main/php-files/local_define.php glpi-storage/config
-
-Dentro do docker:
-
-chown -R www-data:www-data /etc/glpi
-chown -R www-data:www-data /var/lib/glpi
-chown -R www-data:www-data /var/log/glpi
-
-mv install/.htaccess install/.htaccess#
-mv install/.htaccess# install/.htaccess
-
 
 ## OBSERVAÇÕES
 
