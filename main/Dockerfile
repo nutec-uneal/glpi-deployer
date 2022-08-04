@@ -23,6 +23,13 @@ RUN install-php-extensions gd xdebug mysqli intl
 ## Optional 
 RUN install-php-extensions ldap xmlrpc apcu exif bz2 zip opcache
 
+## Config: parameters ".ini"
+
+### Config: OPCache
+RUN echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+### Config: "php.ini" mode (default "production", alternative "development")
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
 # Copy GLPI app to container
 COPY glpi/ /var/www/html
 
