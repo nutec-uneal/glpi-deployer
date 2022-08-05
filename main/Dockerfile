@@ -32,6 +32,7 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
 # Copy GLPI app to container
 COPY glpi/ /var/www/html
+RUN rm -rf /var/www/html/install/*
 
 # Config: supervisord
 RUN mkdir -p /var/log/supervisor
@@ -49,7 +50,6 @@ RUN mkdir $PATH_LOG_STORE
 
 # Config: set app files
 COPY configs/php/downstream.php /var/www/html/inc
-COPY configs/php/.htaccess /var/www/html/install
 
 # Config: files permission
 RUN chown -R www-data:www-data /var/www/html/config

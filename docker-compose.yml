@@ -27,6 +27,7 @@ services:
       - ~/glpi-storage/config:/etc/glpi
       - ~/glpi-storage/data:/var/lib/glpi
       - ~/glpi-storage/log:/var/log/glpi
+    # - ./main/glpi/install:/var/www/html/install
 
   glpi-db:
     image: mariadb:10.8.3
