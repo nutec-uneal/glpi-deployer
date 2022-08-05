@@ -4,12 +4,11 @@
 
 ### Downloads
 
-#### GLPI-Deploy
+#### Projeto GLPI-Deploy
 - ```bash
   # Clone o repositório do projeto.
-  # 1. Clicando na botão download no site.
-  # 2. Executando o comando abaixo (Necessário autenticação).
-  # 3. Para essa autenticação você pode usar token.
+  # 1. Ou clicando na botão download no site do Github.
+  # 2. Ou Executando o comando abaixo (Necessário autenticação).
 
   $ git clone https://github.com/nutecuneal/glpi-deploy.git
   ```
@@ -17,6 +16,7 @@
 #### Docker:
   - Docker é um plataforma que usa virtualização a nível de aplicação/"Sistema Operacional" para entregar softwares empacotados, chamados de containers.
   - [Docker: Guia de Uso e instalação](https://docs.docker.com/desktop/).
+
 #### GLPI:
   - Software de gerenciamento de serviços.
   - [GLPI Website](http://glpi-project.org/) (para baixar versão atual).
@@ -41,7 +41,7 @@
   ```
 
 #### GLPI:
-- Extraia o arquivo *glpi-{version}.tgz*. Copie a pasta extraída para dentro de "*$path1*/glpi-deploy/main". Onde *\$path1* é o caminho para pasta *glpi-deploy*.
+- Extraia o arquivo *glpi-{version}.tgz*. Copie a pasta extraída para dentro de "*$path1*/glpi-deploy/main". Onde *\$path1* é o caminho para pasta *glpi-deploy* clonada na seção [Projeto GLPI-Deploy](####Projeto-GLPI-Deploy).
 
 ## Primeira Instalação
 
@@ -54,13 +54,14 @@ $ cd $path1/glpi-deploy
 ### Criação de Diretórios
 
 ```bash
-$ mkdir $path2/$glpistorage
-$ mkdir $path2/$glpistorage/{config,data,log,database}
-$ mkdir $path2/$glpistorage/data/{_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads,_cache}
+$ mkdir -p $path2/lib/glpi/{config,data,database}
+$ mkdir -p $path2/lib/glpi/data/{_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads,_cache}
+$ mkdir -p $path3/log/glpi
 
 # Copiando arquivo de configuração de diretórios da aplicação
-$ cp main/configs/php/local_define.php $path2/$glpistorage/config
+$ cp main/configs/php/local_define.php $path2/lib/glpi/config
 ```
+**Um possível valor para *\$path2* e *\$path3* é "/var".**
 
 ### Construção dos Containers Docker
 
@@ -74,7 +75,7 @@ $ cp main/configs/php/local_define.php $path2/$glpistorage/config
 # Senha do usuário root
 MARIADB_ROOT_PASSWORD
 
-# HostS permitidoS para acesso ao usuário root. Pode ser ou "%" ou "localhost" (sem aspas). Padrão "localhost".  
+# Hosts permitidos para acesso ao usuário root. Pode ser ou "%" ou "localhost" (sem aspas). Padrão "localhost".  
 MARIADB_ROOT_HOST
 
 # Nome do usuário que será utilizado na aplicação do "GLPI". 
@@ -110,14 +111,21 @@ ports:
 
 ## Altere o valor "~/glpi-storage/" pelos caminhos definidos no tópico "Criação de Diretórios"
 volumes:
-  - ~/glpi-storage/config:/etc/glpi
-  - ~/glpi-storage/data:/var/lib/glpi
-  - ~/glpi-storage/log:/var/log/glpi
+  - ~/glpi-storage/lib/glpi/config:/etc/glpi
+  - ~/glpi-storage/lib/glpi/data/:/var/lib/glpi
+  - ~/glpi-storage/log/glpi:/var/log/glpi
+
+## Descomente a linha (remova o "#" no início da linha)
+## (Antes)
+"# - ./main/glpi/install:/var/www/html/install"
+## (Depois)
+"- ./main/glpi/install:/var/www/html/install"
+
 
 # Service: glpi_db
-## Faça a mesma alteração seguindo o passo anterior
+## Faça as mesmas alterações.
 volumes:
-  - ~/glpi-storage/database:/var/lib/mysql
+  - ~/glpi-storage/lib/glpi/database:/var/lib/mysql
 ```
 
 ```bash
@@ -131,25 +139,60 @@ $ sudo docker-compose -f docker-compose.yml up
 ```bash
 # Para verificar se os containers estão executando
 $ sudo docker container ls
+```
 
-# Entre no container através do comando
+#### GLPI - Banco de Dados
+
+```bash
+# Acesse o container através do comando
 $ sudo docker exec -it glpi-db /bin/bash
+
+# Entre no SGBD (com o usuário root e sua senha)
+$ mariadb -u root -p
+
+# Agora, no terminal cole - um por vez - os dois comando do arquivo "grant.sql". Certifique-se de ter feitos as alterações mencionadas no início do tutorial.
+```
+
+#### GLPI - Aplicação
+```bash
+# Entre no container através do comando
+$ sudo docker exec -it glpi /bin/bash
 
 # Execute
 $ chown -R www-data:www-data /etc/glpi 
 $ chown -R www-data:www-data /var/lib/glpi
 $ chown -R www-data:www-data /var/log/glpi
-
-$ mv /var/www/html/install/.htaccess /var/www/html/install/.htaccess$
 ```
 
-Agora, em seu navegador acesse "localhost:portaGLPI" ou "ip:portaGLPI". Faça a configuração seguindo o [manual de instalação](https://glpi-install.readthedocs.io/en/latest/install/wizard.html).
+Informações para acesso local:
+  - GLPI: 172.16.1.3:80 ou "localhost:portaGLPI" ou "ipHost:portaGLPI"
+  - GLPI Banco de Dados: 172.16.1.2:3306 ou "localhost:3306"
+
+Agora, em seu navegador acesse a aplicação GLPI. Faça a configuração seguindo o [manual de instalação](https://glpi-install.readthedocs.io/en/latest/install/wizard.html).
+
+<br>
+
+Por motivo de segurança recomenda-se remover a pasta de instalação de dentro do código da aplicação. Por isso, faça:
 
 
-Depois de concluído o processo de instalação, execute:
-
+```dockerfile
+#  Em "docker-compose.yml"
+# Service: glpi
+## Comente a linha (inserindo "#"
+## (Antes)
+"- ./main/glpi/install:/var/www/html/install"
+## (Depois)
+"# - ./main/glpi/install:/var/www/html/install"
+```
 ```bash
-$ mv /var/www/html/install/.htaccess$ /var/www/html/install/.htaccess
+# Remova os containers
+$ sudo docker rm -f glpi glpi-db
+
+# Remova o imagem
+$ sudo docker rmi -f glpi-deploy-glpi
+
+# Execute os containers novamente
+$ sudo docker-compose -f docker-compose.yml up
 ```
 
 # Intalação com backup (Migração/Restauração)
