@@ -15,6 +15,7 @@
 
 #### Docker:
   - Docker é um plataforma que usa virtualização a nível de aplicação/"Sistema Operacional" para entregar softwares empacotados, chamados de containers.
+  - Instale o Docker e o Docker-Compose
   - [Docker: Guia de Uso e instalação](https://docs.docker.com/desktop/).
 
 #### GLPI:
@@ -41,7 +42,7 @@
   ```
 
 #### GLPI:
-- Extraia o arquivo *glpi-{version}.tgz*. Copie a pasta extraída para dentro de "*$path1*/glpi-deploy/main". Onde *\$path1* é o caminho para pasta *glpi-deploy* clonada na seção [Projeto GLPI-Deploy](####Projeto-GLPI-Deploy).
+- Extraia o arquivo *glpi-{version}.tgz*. Copie a pasta extraída para dentro de "*$path1*/glpi-deploy/main". Onde *\$path1* é o caminho para pasta *glpi-deploy* clonada na seção [Projeto GLPI-Deploy](#Projeto-GLPI-Deploy).
 
 ## Primeira Instalação
 
@@ -60,8 +61,10 @@ $ mkdir -p $path3/log/glpi
 
 # Copiando arquivo de configuração de diretórios da aplicação
 $ cp main/configs/php/local_define.php $path2/lib/glpi/config
+
+# utilize "sudo" no início dos comandos caso o path requeira permissão de admin.
 ```
-**Um possível valor para *\$path2* e *\$path3* é "/var".**
+- **Um possível valor para *\$path2* e *\$path3* é "/var" ou qualquer outro caminho de sua preferência.**
 
 ### Construção dos Containers Docker
 
@@ -112,7 +115,7 @@ ports:
 ## Altere o valor "~/glpi-storage/" pelos caminhos definidos no tópico "Criação de Diretórios"
 volumes:
   - ~/glpi-storage/lib/glpi/config:/etc/glpi
-  - ~/glpi-storage/lib/glpi/data/:/var/lib/glpi
+  - ~/glpi-storage/lib/glpi/data:/var/lib/glpi
   - ~/glpi-storage/log/glpi:/var/log/glpi
 
 ## Descomente a linha (remova o "#" no início da linha)
