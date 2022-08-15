@@ -63,7 +63,32 @@
 	text-decoration: none;
 }
 
-.call-follow-section{
+.call-follow-section {
 	margin-top: 30px;
-	border-top: solid 1px rgb(153, 148, 148);;	
+	border-top: solid 1px rgb(153, 148, 148);
+}
+
+.list-message {
+	max-width: 540px;
+}
+
+.list-message li {
+	list-style: none;
+}
+
+.box-message {
+	color: #c5cfcf;
+}
+
+.box-message-info {
+	padding: 10px;
+	background-color: #4b3c3c;
+	border-top-right-radius: 15px;
+}
+
+.box-message-text {
+	padding: 10px;
+	background-color: #3f3434;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 }
