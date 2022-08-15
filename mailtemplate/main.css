@@ -1,16 +1,15 @@
 .called-section {
 	margin: 10px;
 	padding: 10px;
-	border: 1px solid #201e1e96;
-	border-radius: 10px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-family: "Google Sans", Helvetica, Arial, sans-serif, Roboto, RobotoDraft;
 }
 
 .called-section h1 {
 	margin: auto;
 	padding: 10px;
 	text-align: center;
-	font-size: 23px;
+	font-size: 20px;
 	color: rgb(70, 70, 70);
 }
 
@@ -26,7 +25,8 @@
 
 .called-td {
 	padding: 5px 15px;
-	width: auto;
+	min-width: 30%;
+
 	vertical-align: top;
 	color: rgb(35, 35, 35);
 }
@@ -34,19 +34,36 @@
 .called-td p {
 	margin-right: 5px;
 	display: inline;
-	font-weight: bold;
 	color: rgb(25, 25, 25);
 }
 
-.called-data-desc{
+.called-td-title {
+	font-weight: bold;
+}
+
+.called-data-desc {
 	margin-top: 15px;
 	padding: 20px;
 	border: 2px dotted rgb(153, 148, 148);
 	border-radius: 5px;
 }
 
-.called-data-desc h4{
+.called-data-desc h4 {
 	margin: 0px;
 	margin-bottom: 20px;
 	text-align: center;
+	font-size: 15px;
+}
+
+.externa-link {
+	text-align: center;
+}
+
+.externa-link a {
+	text-decoration: none;
+}
+
+.call-follow-section{
+	margin-top: 30px;
+	border-top: solid 1px rgb(153, 148, 148);;	
 }
