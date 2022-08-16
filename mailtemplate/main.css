@@ -26,7 +26,6 @@
 .called-td {
 	padding: 5px 15px;
 	min-width: 30%;
-
 	vertical-align: top;
 	color: rgb(35, 35, 35);
 }
@@ -69,6 +68,8 @@
 }
 
 .list-message {
+	margin: auto;
+	padding: 0px;
 	max-width: 540px;
 }
 
@@ -78,18 +79,24 @@
 }
 
 .box-message {
-	color: #ebeeee;
+	color: #e9e7d9;
 }
 
 .box-message-info {
 	padding: 10px 15px;
-	background-color: #1b3147;
+	background-color: #241d1e;
+	font-size: 13px;
+	font-weight: bold;
 	border-top-right-radius: 15px;
+}
+
+.box-message-info-date {
+	margin-top: 5px;
 }
 
 .box-message-text {
 	padding: 10px 15px;
-	background-color: #112b44;
+	background-color: #171010;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 }
