@@ -73,22 +73,27 @@
 }
 
 .list-message li {
+	margin-bottom: 30px;
 	list-style: none;
 }
 
 .box-message {
-	color: #c5cfcf;
+	color: #ebeeee;
 }
 
 .box-message-info {
-	padding: 10px;
-	background-color: #4b3c3c;
+	padding: 10px 15px;
+	background-color: #1b3147;
 	border-top-right-radius: 15px;
 }
 
 .box-message-text {
-	padding: 10px;
-	background-color: #3f3434;
+	padding: 10px 15px;
+	background-color: #112b44;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
+}
+
+.box-message-text p {
+	line-height: 20px;
 }
