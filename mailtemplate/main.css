@@ -90,6 +90,12 @@
 	border-top-right-radius: 15px;
 }
 
+.box-message-info:last-child {
+	text-align: center;
+	font-size: 15px;
+	border-radius: 15px;
+}
+
 .box-message-info-date {
 	margin-top: 5px;
 }
