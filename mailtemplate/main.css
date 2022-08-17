@@ -93,12 +93,12 @@
 }
 
 .box-message:first-child>.box-message-info {
-	background-color: #d82b3c;
+	background-color: #1e423d;
 	color: #fefefe;
 }
 
 .box-message:first-child>.box-message-text {
-	background-color: #dc3545;
+	background-color: #25524b;
 	color: #fefefe;
 }
 
