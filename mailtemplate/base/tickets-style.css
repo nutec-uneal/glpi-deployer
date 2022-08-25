@@ -1,16 +1,20 @@
-.called-section {
+.called-main {
 	margin: 10px;
 	padding: 10px;
 	font-size: 14px;
 	font-family: "Google Sans", Helvetica, Arial, sans-serif, Roboto, RobotoDraft;
 }
 
-.called-section h1 {
+h1 {
 	margin: auto;
 	padding: 10px;
 	text-align: center;
 	font-size: 20px;
 	color: #191414;
+}
+
+.called-section {
+	padding-top: 20px;
 }
 
 .called-data {
@@ -23,14 +27,14 @@
 	width: 100%;
 }
 
-.called-td {
+.called-data table td {
 	padding: 5px 15px;
 	min-width: 30%;
 	vertical-align: top;
 	color: #191414;
 }
 
-.called-td p {
+.called-data table td p {
 	margin-right: 5px;
 	display: inline;
 	color: rgb(25, 25, 25);
@@ -88,50 +92,54 @@
 	border-top-right-radius: 15px;
 }
 
-.box-message:first-child {
-	margin-bottom: 150px;
-}
-
-.box-message:first-child>.box-message-info {
-	background-color: #1e423d;
-	color: #fefefe;
-}
-
-.box-message:first-child>.box-message-text {
-	background-color: #25524b;
-	color: #fefefe;
-}
-
-.box-message:first-child::after {
-	margin-top: 75px;
-	width: 100%;
-	position: absolute;
-	padding: 15px;
-	box-sizing: border-box;
-	content: "Últimos acompanhamentos";
-	background-color: #191414;
-	border-radius: 15px;
-	text-align: center;
-	font-size: 16px;
-	font-weight: bold;
-}
-
-.box-message-info:last-child {
-	text-align: center;
-	font-size: 15px;
-	border-radius: 15px;
-}
-
-.box-message-info-date {
-	margin-top: 5px;
-}
-
 .box-message-text {
 	padding: 10px 15px;
 	background-color: #221e1e;
 	font-size: 15px;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
+}
+
+.box-message-first {
+	margin-bottom: 75px;
+}
+
+.box-message-first .box-message-info {
+	background-color: #1e423d;
+}
+
+.box-message-first .box-message-text {
+	background-color: #25524b;
+}
+
+.list-message ul {
+	margin-top: 25px;
+	padding: 0px;
+}
+
+.list-message h4 {
+	margin: auto;
+	position: relative;
+	box-sizing: border-box;
+	background-color: #191414;
+	border-radius: 15px;
+	text-align: center;
+	font-weight: bold;
+	color: #fefefe;
+}
+
+.lasts-called-title {
+	padding: 15px;
+	font-size: 16px;
+}
+
+.more-msg {
+	padding: 10px;
+	font-size: 15px;
+}
+
+.box-message-info-date {
+	margin-top: 5px;
 }
 
 .box-message-text p {
