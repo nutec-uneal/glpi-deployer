@@ -1,245 +1,189 @@
-<div class="called-section"
-  style="margin: 10px;padding: 10px;font-size: 14px;font-family: &quot;Google Sans&quot;, Helvetica, Arial, sans-serif, Roboto, RobotoDraft;">
-  <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 20px;color: #191414;">Dados do Chamado</h1>
+<div class="called-main"
+  style="margin: 10px;padding: 10px;font-size: 14px;font-family: 'Google Sans', Helvetica, Arial, sans-serif, Roboto, RobotoDraft;">
+  <div class="called-section" style="padding-top: 20px;">
+    <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 20px;color: #191414;">Dados do Chamado</h1>
 
-  <div class="externa-link" style="text-align: center;"><a href="##ticket.url##"
-      style="text-decoration: none;">Acompanhe seu chamado</a></div>
+    <div class="externa-link" style="text-align: center;"><a href="##ticket.url##"
+        style="text-decoration: none;">Acompanhe seu chamado</a></div>
 
-  <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
-    <table style="width: 100%;">
-      <tr>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Requerente:</p>
-          ##ticket.authors##
-        </td>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">E-mail:</p>
-          ##author.email##
-        </td>
-      </tr>
+    <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
+      <table style="width: 100%;">
+        <tr>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Requerente:</p>
+            ##ticket.authors##
+          </td>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">E-mail:</p>
+            ##author.email##
+          </td>
+        </tr>
 
-      <tr>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Função:</p>
-          ##author.title##
-        </td>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Origem:</p>
-          ##author.location##
-        </td>
-      </tr>
+        <tr>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Função:</p>
+            ##author.title##
+          </td>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Origem:</p>
+            ##author.location##
+          </td>
+        </tr>
 
-      <tr>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Data de Abertura:</p>
-          ##ticket.creationdate##
-        </td>
+        <tr>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Data de Abertura:</p>
+            ##ticket.creationdate##
+          </td>
 
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Origem da Requisição:
-          </p>
-          ##ticket.requesttype##
-        </td>
-      </tr>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Origem da Requisição:
+            </p>
+            ##ticket.requesttype##
+          </td>
+        </tr>
 
-      <tr>
-        <td colspan="2" class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Titulo:</p>
-          ##ticket.title##
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Titulo:</p>
+            ##ticket.title##
+          </td>
+        </tr>
 
-      <tr>
-        <td colspan="2" class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <div class="called-data-desc"
-            style="margin-top: 15px;padding: 20px;border: 2px dotted rgb(153, 148, 148);border-radius: 5px;">
-            <h4 style="margin: 0px;margin-bottom: 20px;text-align: center;font-size: 15px;">Descrição</h4>
+        <tr>
+          <td colspan="2" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <div class="called-data-desc"
+              style="margin-top: 15px;padding: 20px;border: 2px dotted rgb(153, 148, 148);border-radius: 5px;">
+              <h4 style="margin: 0px;margin-bottom: 20px;text-align: center;font-size: 15px;">Descrição</h4>
 
-            <p style="margin-right: 5px;display: inline;color: rgb(25, 25, 25);">
-              ##ticket.description##
+              <p style="margin-right: 5px;display: inline;color: rgb(25, 25, 25);">
+                ##ticket.description##
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
+      <table style="width: 100%;">
+        <tr>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Status:</p>
+            ##ticket.status##
+          </td>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Data Encerramento:</p>
+            ##ticket.closedate##
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Grupo Responsável:</p>
+            ##task.group##
+          </td>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Reponsáveis:</p>
+            ##task.user##
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Urgência, Prioridade:
+            </p>
+            ##ticket.urgency##, ##ticket.priority##
+          </td>
+
+          <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
+            <p class="called-td-title"
+              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Impacto:</p>
+            ##ticket.impact##
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="called-section call-follow-section"
+    style="padding-top: 20px;margin-top: 30px;border-top: solid 1px rgb(153, 148, 148);">
+    <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 20px;color: #191414;">Soluções</h1>
+
+    <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
+      <div class="list-message" style="margin: auto;padding: 0px;max-width: 540px;">
+        <div class="box-message box-message-first"
+          style="position: relative;margin-bottom: 75px;list-style: none;color: #fefefe;">
+
+          <p>##FOREACH LAST 1 timelineitems##</p>
+          <div class="box-message-info"
+            style="padding: 10px 15px;background-color: #1e423d;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
+            <div>
+              <span>Autor:</span>
+              <span>##timelineitems.author##</span>
+            </div>
+
+            <div class="box-message-info-date" style="margin-top: 5px;">
+              <span>Data:</span>
+              <span>##timelineitems.date##</span>
+            </div>
+          </div>
+
+          <div class="box-message-text"
+            style="padding: 10px 15px;background-color: #25524b;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
+            <p style="line-height: 20px;">
+              ##timelineitems.description##
             </p>
           </div>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
-    <table style="width: 100%;">
-      <tr>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Status:</p>
-          ##ticket.status##
-        </td>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Data Encerramento:</p>
-          ##ticket.closedate##
-        </td>
-      </tr>
-
-      <tr>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Grupo Responsável:</p>
-          NS1 - CENTRAL DE SERVIÇOS
-        </td>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Reponsáveis:</p>
-          José Ytalo Ramon de Almeida Gonçalves,José Ytalo Ramon de Almeida Gonçalves,José Ytalo Ramon de Almeida
-          Gonçalves,José Ytalo Ramon de Almeida Gonçalves
-        </td>
-      </tr>
-
-      <tr>
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Urgência, Prioridade:
-          </p>
-          ##ticket.urgency##, ##ticket.priority##
-        </td>
-
-        <td class="called-td" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-          <p class="called-td-title"
-            style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Impacto:</p>
-          ##ticket.impact##
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="called-section call-follow-section"
-  style="margin: 10px;padding: 10px;font-size: 14px;font-family: &quot;Google Sans&quot;, Helvetica, Arial, sans-serif, Roboto, RobotoDraft;margin-top: 30px;border-top: solid 1px rgb(153, 148, 148);">
-  <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 20px;color: #191414;">Soluções</h1>
-
-  <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
-    <ul class="list-message" style="margin: auto;padding: 0px;max-width: 540px;">
-      <li class="box-message" style="position: relative;margin-bottom: 150px;list-style: none;color: #fefefe;">
-        <div class="box-message-info"
-          style="padding: 10px 15px;background-color: #191414;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
-          <div>
-            <span>Autor:</span>
-            <span>José Gonçalves</span>
-          </div>
-
-          <div class="box-message-info-date" style="margin-top: 5px;">
-            <span>Data:</span>
-            <span>05h:05m 15/09/13</span>
-          </div>
+          <p>##ENDFOREACHtimelineitems##</p>
         </div>
 
-        <div class="box-message-text"
-          style="padding: 10px 15px;background-color: #221e1e;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-          <p style="line-height: 20px;">
-            dafihsdhfishdifhisdfhiuhdfuiyhufg.
-            dzhfsduifyhisudyhhfusdgufgfgd.
-            sdgfujfgfdghjdfdfg.fgjsd.
-            dfhsdfhdfh
-          </p>
-        </div>
-      </li>
+        <h4 class="lasts-called-title"
+          style="padding: 15px;font-size: 16px;margin: auto;position: relative;box-sizing: border-box;background-color: #191414;border-radius: 15px;text-align: center;font-weight: bold;color: #fefefe;">
+          Últimos acompanhamentos</h4>
 
-      <li class="box-message" style="position: relative;margin-bottom: 30px;list-style: none;color: #fefefe;">
-        <div class="box-message-info"
-          style="padding: 10px 15px;background-color: #191414;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
-          <div>
-            <span>Autor:</span>
-            <span>José Gonçalves</span>
-          </div>
+        <ul style="margin-top: 25px;padding: 0px;">
+          <li class="box-message" style="position: relative;margin-bottom: 30px;list-style: none;color: #fefefe;">
+            <p>##FOREACH LAST 4 timelineitems##</p>
+            <div class="box-message-info"
+              style="padding: 10px 15px;background-color: #191414;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
+              <div>
+                <span>Autor:</span>
+                <span>##timelineitems.author##</span>
+              </div>
 
-          <div class="box-message-info-date" style="margin-top: 5px;">
-            <span>Data:</span>
-            <span>05h:05m 15/09/13</span>
-          </div>
-        </div>
+              <div class="box-message-info-date" style="margin-top: 5px;">
+                <span>Data:</span>
+                <span>##timelineitems.date##</span>
+              </div>
+            </div>
 
-        <div class="box-message-text"
-          style="padding: 10px 15px;background-color: #221e1e;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-          <p style="line-height: 20px;">
-            dafihsdhfishdifhisdfhiuhdfuiyhufg.
-            dzhfsduifyhisudyhhfusdgufgfgd.
-            sdgfujfgfdghjdfdfg.fgjsd.
-            dfhsdfhdfh
-          </p>
-        </div>
-      </li>
+            <div class="box-message-text"
+              style="padding: 10px 15px;background-color: #221e1e;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
+              <p style="line-height: 20px;">
+                ##timelineitems.description##
+              </p>
+            </div>
+            <p>##ENDFOREACHtimelineitems##</p>
+          </li>
+        </ul>
 
-      <li class="box-message" style="position: relative;margin-bottom: 30px;list-style: none;color: #fefefe;">
-        <div class="box-message-info"
-          style="padding: 10px 15px;background-color: #191414;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
-          <div>
-            <span>Autor:</span>
-            <span>José Gonçalves</span>
-          </div>
-          <div class="box-message-info-date" style="margin-top: 5px;">
-            <span>Data:</span>
-            <span>05h:05m 15/09/13</span>
-          </div>
-        </div>
-
-        <div class="box-message-text"
-          style="padding: 10px 15px;background-color: #221e1e;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-          <p style="line-height: 20px;">
-            dafihsdhfishdifhisdfhiuhdfuiyhufg.
-            dzhfsduifyhisudyhhfusdgufgfgd.
-            sdgfujfgfdghjdfdfg.fgjsd.
-            dfhsdfhdfh
-            dafihsdhfishdifhisdfhiuhdfuiyhufg.
-            dzhfsduifyhisudyhhfusdgufgfgd.
-            sdgfujfgfdghjdfdfg.fgjsd.
-            dfhsdfhdfh
-            dafihsdhfishdifhisdfhiuhdfuiyhufg.
-            dzhfsduifyhisudyhhfusdgufgfgd.
-            sdgfujfgfdghjdfdfg.fgjsd.
-            dfhsdfhdfh
-          </p>
-        </div>
-      </li>
-
-      <li class="box-message" style="position: relative;margin-bottom: 30px;list-style: none;color: #fefefe;">
-        <div class="box-message-info"
-          style="padding: 10px 15px;background-color: #191414;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
-          <div>
-            <span>Autor:</span>
-            <span>José Gonçalves</span>
-          </div>
-          <div class="box-message-info-date" style="margin-top: 5px;">
-            <span>Data:</span>
-            <span>05h:05m 15/09/13</span>
-          </div>
-        </div>
-
-        <div class="box-message-text"
-          style="padding: 10px 15px;background-color: #221e1e;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-          <p style="line-height: 20px;">
-            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-            Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
-            Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
-            Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the
-            undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
-            Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
-            theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor
-            sit amet..", comes from a line in section 1.10.32.
-          </p>
-        </div>
-      </li>
-
-      <li class="box-message" style="position: relative;margin-bottom: 30px;list-style: none;color: #fefefe;">
-        <div class="box-message-info"
-          style="padding: 10px 15px;background-color: #191414;font-size: 15px;font-weight: bold;border-top-right-radius: 15px;text-align: center;border-radius: 15px;">
-          <span>+ mensagens ...</span>
-        </div>
-      </li>
-    </ul>
+        <h4 class="more-msg"
+          style="max-width: 450px;padding: 10px;font-size: 14px;margin: auto;position: relative;box-sizing: border-box;background-color: #191414;border-radius: 15px;text-align: center;font-weight: bold;color: #fefefe;">
+          + mensagens ...</h4>
+      </div>
+    </div>
   </div>
 </div>
