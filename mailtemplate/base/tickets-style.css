@@ -96,13 +96,13 @@ h1 {
   margin-left: 15px;
   padding: 15px 15px 15px 15px;
   max-width: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   border-left: 1px dashed #8d8181;
-  text-decoration: none;
   text-align: center;
   font-size: 10px;
+}
+
+.box-message-file a {
+  text-decoration: none;
   color: #fefefe;
 }
 
