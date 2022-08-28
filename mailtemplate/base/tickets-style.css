@@ -126,6 +126,10 @@ h1 {
   border-bottom-right-radius: 15px;
 }
 
+.box-message-text p {
+  width: 100%;
+}
+
 .box-message-first {
   margin-bottom: 75px;
 }
