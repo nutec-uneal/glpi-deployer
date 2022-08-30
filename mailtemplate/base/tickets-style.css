@@ -74,14 +74,24 @@ h1 {
 .list-message {
   margin: auto;
   padding: 0px;
-  max-width: 540px;
+  max-width: 500px;
 }
 
 .box-message {
   position: relative;
+  margin: auto;
   margin-bottom: 30px;
+  max-width: 480px;
   list-style: none;
   color: #fefefe;
+}
+
+.box-message-left {
+  float: left;
+}
+
+.box-message-right {
+  float: right;
 }
 
 .box-message-info {
@@ -92,11 +102,30 @@ h1 {
   border-top-right-radius: 15px;
 }
 
+.file-section {
+  margin-top: 20px;
+}
+
+.file-section h6 {
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+
+}
+
+.list-files {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+  border-radius: 15px;
+  background-color: #201a1a;
+}
+
 .box-message-file {
-  margin-left: 15px;
   padding: 15px 15px 15px 15px;
   max-width: 150px;
-  border-left: 1px dashed #8d8181;
   text-align: center;
   font-size: 10px;
 }
@@ -112,8 +141,8 @@ h1 {
 
 .box-message-file img {
   margin: auto auto 10px auto;
-  width: 64px;
-  height: 64px;
+  width: 36px;
+  height: 36px;
 }
 
 .box-message-text {
@@ -142,8 +171,8 @@ h1 {
   background-color: #25524b;
 }
 
+
 .list-message ul {
-  margin-top: 25px;
   padding: 0px;
 }
 
@@ -156,6 +185,10 @@ h1 {
   text-align: center;
   font-weight: bold;
   color: #fefefe;
+}
+
+.list-last-messages {
+  max-width: 540px;
 }
 
 .lasts-called-title {
