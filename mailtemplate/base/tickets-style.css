@@ -82,12 +82,10 @@
   margin-top: 30px;
   max-width: 500px;
   list-style: none;
-  color: #fefefe;
 }
 
 .box-message-info {
   padding: 15px 15px;
-  background-color: #191414;
   font-size: 14px;
   font-weight: bold;
 }
@@ -98,7 +96,6 @@
 
 .box-message-content {
   padding: 10px 0px 15px 15px;
-  background-color: #221e1e;
   font-size: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -144,11 +141,9 @@
   padding: 15px;
   font-size: 16px;
   box-sizing: border-box;
-  background-color: #191414;
   border-radius: 15px;
   text-align: center;
   font-weight: bold;
-  color: #fefefe;
 }
 
 .box-message-content>p {
@@ -162,14 +157,6 @@
 
 .box-message-first {
   margin-bottom: 75px;
-}
-
-.box-message-first .box-message-info {
-  background-color: #1e423d;
-}
-
-.box-message-first .box-message-content {
-  background-color: #25524b;
 }
 
 .list-message ul {
@@ -198,7 +185,7 @@
   border-bottom-right-radius: 15px;
 }
 
-.list-last-messages{
+.list-last-messages {
   display: table;
 }
 
@@ -212,4 +199,24 @@
 
 .float-right {
   float: right;
+}
+
+.color-white {
+  color: #fefefe;
+}
+
+.bg-black-10 {
+  background-color: #191414;
+}
+
+.bg-black-20 {
+  background-color: #221e1e;
+}
+
+.bg-green-10 {
+  background-color: #1e423d;
+}
+
+.bg-green-20 {
+  background-color: #25524b;
 }
