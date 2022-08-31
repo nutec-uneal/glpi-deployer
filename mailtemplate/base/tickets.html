@@ -12,50 +12,44 @@
 <body>
 	<div class="called-main">
 		<div class="called-section">
-			<h1>Dados do Chamado</h1>
+			<header>
+				<h1 class="title-section">Dados do Chamado</h1>
+				<div class="external-link"><a href="http://www.google.com">Acompanhe seu chamado</a></div>
+			</header>
 
-			<div class="externa-link"><a href="http://www.google.com">Acompanhe seu chamado</a></div>
-
-			<div class="called-data">
-				<table>
+			<div>
+				<table class="called-table called-data">
 					<tr>
 						<td>
-							<p class="called-td-title">Requerente:</p>
-							José Ytalo Ramon
+							<p>Requerente:</p>José Ytalo Ramon
 						</td>
 						<td>
-							<p class="called-td-title">E-mail:</p>
-							ramongoncalves76@hmail.com
+							<p>E-mail:</p>ramongoncalves76@hmail.com
 						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<p class="called-td-title">Titulação:</p>
-							Coordenador do Núcleo de Estudos Territoriais - GETERRI/UNEAL
+							<p>Titulação:</p>Coordenador do Núcleo de Estudos Territoriais - GETERRI/UNEAL
 						</td>
 						<td>
-							<p class="called-td-title">Categoria:</p>
-							Prof. Titular da Universidade Estadual de Alagoas - Uneal
+							<p>Categoria:</p>Prof. Titular da Universidade Estadual de Alagoas - Uneal
 						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<p class="called-td-title">Data de Abertura:</p>
-							15/04/2022
+							<p>Data de Abertura:</p>15/04/2022
 						</td>
 
 						<td>
-							<p class="called-td-title">Origem da Requisição:</p>
-							E-MAIL
+							<p>Origem da Requisição:</p>E-MAIL
 						</td>
 					</tr>
 
 					<tr>
 						<td colspan="2">
-							<p class="called-td-title">Titulo:</p>
-							Um modelo é um objeto global do GLPI que define as informações incluídas
+							<p>Titulo:</p>Um modelo é um objeto global do GLPI que define as informações incluídas
 						</td>
 					</tr>
 
@@ -88,52 +82,45 @@
 						</td>
 					</tr>
 				</table>
-			</div>
 
-			<div class="called-data">
-				<table>
+				<table class="called-table called-data">
 					<tr>
 						<td>
-							<p class="called-td-title">Status:</p>
-							Processando (atribuído)
+							<p>Status:</p>Processando (atribuído)
 						</td>
 						<td>
-							<p class="called-td-title">Data Encerramento:</p>
+							<p>Data Encerramento:</p> 14/05/12
 						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<p class="called-td-title">Grupo Responsável:</p>
-							NS1 - CENTRAL DE SERVIÇOS
+							<p>Grupo Responsável:</p>NS1 - CENTRAL DE SERVIÇOS
 						</td>
 						<td>
-							<p class="called-td-title">Reponsáveis:</p>
-							José Ytalo Ramon de Almeida Gonçalves,José Ytalo Ramon de Almeida Gonçalves,José Ytalo Ramon de Almeida
-							Gonçalves,José Ytalo Ramon de Almeida Gonçalves
+							<p>Reponsáveis:</p>José Ytalo Ramon de Almeida Gonçalves,José Ytalo Ramon de Almeida Gonçalves,José Ytalo
+							Ramon de Almeida Gonçalves,José Ytalo Ramon de Almeida Gonçalves
 						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<p class="called-td-title">Urgência, Prioridade:</p>
-							Média, Média
+							<p>Urgência, Prioridade:</p>Média, Média
 						</td>
 
 						<td>
-							<p class="called-td-title">Impacto:</p>
-							Médio
+							<p>Impacto:</p>Médio
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 
-		<div class="called-section call-follow-section">
-			<h1>Soluções</h1>
+		<div class="called-section">
+			<h1 class="title-section">Acompanhamentos</h1>
 
 			<div class="called-data">
-				<div class="list-message">
+				<div class="list-message followup-section">
 					<div class="box-message box-message-first">
 						<div class="box-message-info">
 							<div>
@@ -141,13 +128,13 @@
 								<span>José Gonçalves</span>
 							</div>
 
-							<div class="box-message-info-date">
+							<div class="box-message-info-space-top">
 								<span>Data:</span>
 								<span>05h:05m 15/09/13</span>
 							</div>
 						</div>
 
-						<div class="box-message-text">
+						<div class="box-message-content">
 							<p>
 								dafihsdhfishdifhisdfhiuhdfuiyhufg.
 								dzhfsduifyhisudyhhfusdgufgfgd.
@@ -159,109 +146,101 @@
 					</div>
 
 					<div>
-						<h4 class="lasts-called-title">Últimas Acompanhamentos</h4>
+						<h4 class="last-called-title">Últimas Acompanhamentos</h4>
 
-						<div class="file-section">
-							<h6>Arquivos</h6>
+						<div class="list-messages">
+							<div class="box-message">
+								<div class="box-message-info box-message-radius-lt box-message-radius-rt box-message-info-center">
+									<span>Arquivos</span>
+								</div>
 
-							<ul class="list-files">
-								<li class="box-message-file">
-									<a href="">
-										<img src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
-											alt="Download file icon">
-										<p>File.pdf</p>
-									</a>
+								<div class="box-message-content">
+									<ul class="list-files">
+										<li class="box-message-file">
+											<a href="">
+												<img
+													src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
+													alt="Download file icon">
+												<p>File.pdf</p>
+											</a>
+										</li>
+
+										<li class="box-message-file">
+											<a href="">
+												<img
+													src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
+													alt="Download file icon">
+												<p>File.pdf</p>
+											</a>
+										</li>
+
+										<li class="box-message-file">
+											<a href="">
+												<img
+													src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
+													alt="Download file icon">
+												<p>File.pdf</p>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<ul class="list-last-messages">
+								<li class="box-message float-left">
+									<div class="box-message-info box-message-radius-rt">
+										<div>
+											<span>Autor:</span>
+											<span>José Gonçalves</span>
+										</div>
+
+										<div class="box-message-info-space-top">
+											<span>Data:</span>
+											<span>05h:05m 15/09/13</span>
+										</div>
+									</div>
+
+									<div class="box-message-content">
+										<p>
+											dafihsdhfishdifhisdfhiuhdfuiyhufg.
+											dzhfsduifyhisudyhhfusdgufgfgd.
+											sdgfujfgfdghjdfdfg.fgjsd.
+											dfhsdfhdfh
+										</p>
+									</div>
 								</li>
 
-								<li class="box-message-file">
-									<a href="">
-										<img src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
-											alt="Download file icon">
-										<p>File.pdf</p>
-									</a>
-								</li>
+								<li class="box-message float-right">
+									<div class="box-message-info box-message-radius-lt">
+										<div>
+											<span>Autor:</span>
+											<span>José Gonçalves</span>
+										</div>
 
-								<li class="box-message-file">
-									<a href="">
-										<img src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
-											alt="Download file icon">
-										<p>File.pdf</p>
-									</a>
+										<div class="box-message-info-space-top">
+											<span>Data:</span>
+											<span>05h:05m 15/09/13</span>
+										</div>
+									</div>
+
+									<div class="box-message-content">
+										<p>
+											dafihsdhfishdifhisdfhiuhdfuiyhufg.
+											dzhfsduifyhisudyhhfusdgufgfgd.
+											sdgfujfgfdghjdfdfg.fgjsd.
+											dfhsdfhdfh
+										</p>
+									</div>
 								</li>
 							</ul>
+
+							<div class="box-message">
+								<div
+									class="box-message-info box-message-radius-lt box-message-radius-rt  box-message-radius-bt box-message-radius-bt  box-message-info-center more-msg">
+									<span>+ mensagens... (15)</span>
+								</div>
+							</div>
 						</div>
-
-
-						<ul class="list-last-messages">
-							<li class="box-message box-message-left">
-								<div class="box-message-info">
-									<div>
-										<span>Autor:</span>
-										<span>José Gonçalves</span>
-									</div>
-
-									<div class="box-message-info-date">
-										<span>Data:</span>
-										<span>05h:05m 15/09/13</span>
-									</div>
-								</div>
-
-								<div class="box-message-text">
-									<p>
-										dafihsdhfishdifhisdfhiuhdfuiyhufg.
-										dzhfsduifyhisudyhhfusdgufgfgd.
-										sdgfujfgfdghjdfdfg.fgjsd.
-										dfhsdfhdfh
-									</p>
-								</div>
-							</li>
-
-							<li class="box-message box-message-right">
-								<div class="box-message-info">
-									<div>
-										<span>Autor:</span>
-										<span>José Gonçalves</span>
-									</div>
-
-									<div class="box-message-info-date">
-										<span>Data:</span>
-										<span>05h:05m 15/09/13</span>
-									</div>
-								</div>
-
-								<div class="box-message-text">
-									<p>
-										dafihsdhfishdifhisdfhiuhdfuiyhufg.
-										dzhfsduifyhisudyhhfusdgufgfgd.
-										sdgfujfgfdghjdfdfg.fgjsd.
-										dfhsdfhdfh
-									</p>
-								</div>
-							</li>
-
-							<li class="box-message box-message-left">
-								<div class="box-message-info">
-									<div>
-										<span>Autor:</span>
-										<span>José Gonçalves</span>
-									</div>
-
-									<div class="box-message-info-date">
-										<span>Data:</span>
-										<span>05h:05m 15/09/13</span>
-									</div>
-								</div>
-
-								<div class="box-message-text">
-									<p>
-										dafihsdhfishdifhisdfhiuhdfuiyhufg.
-										dzhfsduifyhisudyhhfusdgufgfgd.
-										sdgfujfgfdghjdfdfg.fgjsd.
-										dfhsdfhdfh
-									</p>
-								</div>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>

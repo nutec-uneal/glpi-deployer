@@ -5,43 +5,51 @@
   font-family: 'Google Sans', Helvetica, Arial, sans-serif, Roboto, RobotoDraft;
 }
 
-h1 {
+.title-section {
   margin: auto;
   padding: 10px;
   text-align: center;
-  font-size: 20px;
+  font-size: 21px;
   color: #191414;
 }
 
 .called-section {
-  padding-top: 20px;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  border-bottom: solid 1px rgb(153, 148, 148);
 }
 
 .called-data {
   margin-top: 10px;
   padding-top: 30px;
+  width: 100%;
   border-top: 1px dashed #191414;
 }
 
-.called-data table {
-  width: 100%;
+.called-table {
+  max-width: 100%;
 }
 
-.called-data table td {
+.called-table td {
   padding: 5px 15px;
   min-width: 30%;
   vertical-align: top;
   color: #191414;
 }
 
-.called-data table td p {
+.called-table td>p {
   margin-right: 5px;
   display: inline;
+  font-weight: bold;
   color: rgb(25, 25, 25);
 }
 
-.called-td-title {
-  font-weight: bold;
+.external-link {
+  text-align: center;
+}
+
+.external-link a {
+  text-decoration: none;
 }
 
 .called-data-desc {
@@ -51,24 +59,15 @@ h1 {
   border-radius: 5px;
 }
 
-.called-data-desc h4 {
+.called-data-desc>h4 {
   margin: 0px;
   margin-bottom: 20px;
   text-align: center;
   font-size: 15px;
 }
 
-.externa-link {
-  text-align: center;
-}
-
-.externa-link a {
-  text-decoration: none;
-}
-
-.call-follow-section {
-  margin-top: 30px;
-  border-top: solid 1px rgb(153, 148, 148);
+.followup-section {
+  max-width: 450px;
 }
 
 .list-message {
@@ -80,37 +79,33 @@ h1 {
 .box-message {
   position: relative;
   margin: auto;
-  margin-bottom: 30px;
-  max-width: 480px;
+  margin-top: 30px;
+  max-width: 500px;
   list-style: none;
   color: #fefefe;
 }
 
-.box-message-left {
-  float: left;
-}
-
-.box-message-right {
-  float: right;
-}
-
 .box-message-info {
-  padding: 10px 15px;
+  padding: 15px 15px;
   background-color: #191414;
   font-size: 14px;
   font-weight: bold;
-  border-top-right-radius: 15px;
 }
 
-.file-section {
-  margin-top: 20px;
+.box-message-info-space-top {
+  margin-top: 5px;
 }
 
-.file-section h6 {
-  padding: 10px;
-  margin: auto;
+.box-message-content {
+  padding: 10px 0px 15px 15px;
+  background-color: #221e1e;
+  font-size: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.box-message-info-center {
   text-align: center;
-
 }
 
 .list-files {
@@ -119,12 +114,12 @@ h1 {
   flex-direction: row;
   justify-content: center;
   list-style: none;
-  border-radius: 15px;
-  background-color: #201a1a;
 }
 
 .box-message-file {
-  padding: 15px 15px 15px 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   max-width: 150px;
   text-align: center;
   font-size: 10px;
@@ -145,18 +140,24 @@ h1 {
   height: 36px;
 }
 
-.box-message-text {
-  padding: 10px 0px 15px 15px;
-  display: flex;
-  flex-direction: row;
-  background-color: #221e1e;
-  font-size: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+.last-called-title {
+  padding: 15px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #191414;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #fefefe;
 }
 
-.box-message-text p {
-  width: 100%;
+.box-message-content>p {
+  line-height: 20px;
+}
+
+.list-messages {
+  padding: 0px;
+  max-width: 540px;
 }
 
 .box-message-first {
@@ -167,45 +168,48 @@ h1 {
   background-color: #1e423d;
 }
 
-.box-message-first .box-message-text {
+.box-message-first .box-message-content {
   background-color: #25524b;
 }
-
 
 .list-message ul {
   padding: 0px;
 }
 
-.list-message h4 {
-  margin: auto;
-  position: relative;
-  box-sizing: border-box;
-  background-color: #191414;
-  border-radius: 15px;
-  text-align: center;
-  font-weight: bold;
-  color: #fefefe;
-}
-
-.list-last-messages {
-  max-width: 540px;
-}
-
-.lasts-called-title {
-  padding: 15px;
-  font-size: 16px;
-}
-
 .more-msg {
-  max-width: 450px;
   padding: 10px;
+  position: relative;
   font-size: 14px;
 }
 
-.box-message-info-date {
-  margin-top: 5px;
+.box-message-radius-lt {
+  border-top-left-radius: 15px;
 }
 
-.box-message-text p {
-  line-height: 20px;
+.box-message-radius-rt {
+  border-top-right-radius: 15px;
+}
+
+.box-message-radius-bt {
+  border-bottom-left-radius: 15px;
+}
+
+.box-message-radius-bt {
+  border-bottom-right-radius: 15px;
+}
+
+.list-last-messages{
+  display: table;
+}
+
+.list-last-messages li {
+  width: 480px;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
 }
