@@ -19,10 +19,15 @@
   border-bottom: solid 1px rgb(153, 148, 148);
 }
 
+.last-message-section {
+  border-left: 1px dotted black;
+  border-right: 1px dotted black;
+}
+
 .called-data {
   margin-top: 10px;
   padding-top: 30px;
-  width: 100%;
+  max-width: 100%;
   border-top: 1px dashed #191414;
 }
 
@@ -41,7 +46,7 @@
   margin-right: 5px;
   display: inline;
   font-weight: bold;
-  color: rgb(25, 25, 25);
+  color: #191919;
 }
 
 .external-link {
@@ -80,6 +85,8 @@
   position: relative;
   margin: auto;
   margin-top: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
   max-width: 500px;
   list-style: none;
 }
@@ -95,7 +102,7 @@
 }
 
 .box-message-content {
-  padding: 10px 0px 15px 15px;
+  padding: 10px 15px 15px 15px;
   font-size: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -141,7 +148,6 @@
   padding: 15px;
   font-size: 16px;
   box-sizing: border-box;
-  border-radius: 15px;
   text-align: center;
   font-weight: bold;
 }
@@ -164,6 +170,11 @@
 }
 
 .more-msg {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.more-msg div {
   padding: 10px;
   position: relative;
   font-size: 14px;
@@ -177,11 +188,11 @@
   border-top-right-radius: 15px;
 }
 
-.box-message-radius-bt {
+.box-message-radius-lb {
   border-bottom-left-radius: 15px;
 }
 
-.box-message-radius-bt {
+.box-message-radius-rb {
   border-bottom-right-radius: 15px;
 }
 
@@ -190,7 +201,7 @@
 }
 
 .list-last-messages li {
-  width: 480px;
+  max-width: 460px;
 }
 
 .float-left {
@@ -203,6 +214,10 @@
 
 .color-white {
   color: #fefefe;
+}
+
+.color-black {
+  color: #191919;
 }
 
 .bg-black-10 {
@@ -218,5 +233,5 @@
 }
 
 .bg-green-20 {
-  background-color: #25524b;
+  background-color: #234640;
 }
