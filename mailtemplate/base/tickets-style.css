@@ -120,15 +120,10 @@
 }
 
 .list-files {
-  margin-top: 0px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  list-style: none;
+  width: 100%;
 }
 
 .box-message-file {
-  padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
   max-width: 150px;
@@ -160,6 +155,8 @@
 }
 
 .box-message-content-msg {
+  display: block;
+  max-width: 420px;
   line-height: 20px;
 }
 
@@ -205,13 +202,14 @@
   border-bottom-right-radius: 15px;
 }
 
-.list-last-messages {
-  display: flex;
-  flex-direction: column;
+.list-last-messages td {
+  position: relative;
+  width: 480px;
+  max-width: 480px;
 }
 
-.list-last-messages li {
-  width: 100%;
+.mt-10 {
+  margin-top: 10px;
 }
 
 .float-left {
