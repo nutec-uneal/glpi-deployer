@@ -1,22 +1,22 @@
-<div class="called-main"
+<div
   style="margin: 10px;padding: 10px;font-size: 14px;font-family: 'Google Sans', Helvetica, Arial, sans-serif, Roboto, RobotoDraft;">
-  <div class="called-section" style="padding-top: 20px;">
-    <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 20px;color: #191414;">Dados do Chamado</h1>
+  <div style="padding-top: 15px;padding-bottom: 30px;border-bottom: solid 1px rgb(153, 148, 148);">
+    <header>
+      <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 21px;color: #191414;">
+        Dados do Chamado</h1>
+      <div style="text-align: center;"><a href="##ticket.url##" style="text-decoration: none;">Acompanhe seu
+          chamado</a></div>
+    </header>
 
-    <div class="externa-link" style="text-align: center;"><a href="##ticket.url##"
-        style="text-decoration: none;">Acompanhe seu chamado</a></div>
-
-    <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
-      <table style="width: 100%;">
+    <div>
+      <table style="margin-top: 10px;padding-top: 30px;max-width: 100%;border-top: 1px dashed #191414;">
         <tr>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Requerente:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Requerente:</p>José Ytalo
             ##ticket.authors##
           </td>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">E-mail:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">E-mail:</p>
             ##FOREACHauthors##
             ##author.email##,
             ##ENDFOREACHauthors##
@@ -25,15 +25,13 @@
 
         <tr>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Titulação:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Titulação:</p>
             ##FOREACHauthors##
             ##author.title##
             ##ENDFOREACHauthors##
           </td>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Categoria:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Categoria:</p>
             ##FOREACHauthors##
             ##author.category##
             ##ENDFOREACHauthors##
@@ -42,81 +40,71 @@
 
         <tr>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Data de Abertura:</p>
-            ##ticket.creationdate##
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Data de Abertura:</p>
+            #ticket.creationdate##
           </td>
 
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Origem da Requisição:
-            </p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Origem da Requisição:</p>
             ##ticket.requesttype##
           </td>
         </tr>
 
         <tr>
           <td colspan="2" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Titulo:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Titulo:</p>
             ##ticket.title##
           </td>
         </tr>
 
         <tr>
           <td colspan="2" style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <div class="called-data-desc"
-              style="margin-top: 15px;padding: 20px;border: 2px dotted rgb(153, 148, 148);border-radius: 5px;">
+            <div style="margin-top: 15px;padding: 20px;border: 2px dotted rgb(153, 148, 148);border-radius: 5px;">
               <h4 style="margin: 0px;margin-bottom: 20px;text-align: center;font-size: 15px;">Descrição</h4>
 
-              <p style="margin-right: 5px;display: inline;color: rgb(25, 25, 25);">
+              <p>
                 ##ticket.description##
               </p>
             </div>
           </td>
         </tr>
       </table>
-    </div>
 
-    <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
-      <table style="width: 100%;">
+      <table style="margin-top: 10px;padding-top: 30px;max-width: 100%;border-top: 1px dashed #191414;">
         <tr>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Status:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Status:</p>Processando
             ##ticket.status##
           </td>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Data Encerramento:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Data Encerramento:</p>
             ##ticket.closedate##
           </td>
         </tr>
 
         <tr>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Grupo Responsável:</p>
-            ##ticket.assigntogroups##
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Grupo Responsável:</p>
+            ##FOREACHtasks##
+            ##task.group##
+            ##ENDFOREACHtasks##
           </td>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Reponsáveis:</p>
-            ##ticket.assigntousers##
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Reponsáveis:</p>
+            ##FOREACHtasks##
+            ##task.user##,
+            ##ENDFOREACHtasks##
           </td>
         </tr>
 
         <tr>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Urgência, Prioridade:
-            </p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Urgência, Prioridade:</p>
             ##ticket.urgency##, ##ticket.priority##
           </td>
 
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p class="called-td-title"
-              style="font-weight: bold;margin-right: 5px;display: inline;color: rgb(25, 25, 25);">Impacto:</p>
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Impacto:</p>
             ##ticket.impact##
           </td>
         </tr>
@@ -124,83 +112,190 @@
     </div>
   </div>
 
-  <div class="called-section call-follow-section"
-    style="padding-top: 20px;margin-top: 30px;border-top: solid 1px rgb(153, 148, 148);">
-    <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 20px;color: #191414;">Soluções</h1>
+  <div style="padding-top: 15px;padding-bottom: 30px;border-bottom: solid 1px rgb(153, 148, 148);">
+    <h1 style="margin: auto;padding: 10px;text-align: center;font-size: 21px;color: #191414;">
+      Acompanhamentos</h1>
 
-    <div class="called-data" style="margin-top: 10px;padding-top: 30px;border-top: 1px dashed #191414;">
-      <div class="list-message" style="margin: auto;padding: 0px;max-width: 540px;">
-        <div class="box-message box-message-first"
-          style="position: relative;margin-bottom: 75px;list-style: none;color: #fefefe;">
-          ##FOREACH LAST 1 timelineitems##
-          <div class="box-message-info"
-            style="padding: 10px 15px;background-color: #1e423d;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
+    <div style="margin-top: 10px;padding-top: 30px;max-width: 100%;border-top: 1px dashed #191414;">
+      <div style="max-width: 500px;margin: auto;padding: 0px;">
+
+        <span>##FOREACH LAST 1 timelineitems##</span>
+        <div
+          style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;margin-bottom: 75px;color: #fefefe;">
+          <div
+            style="padding: 15px 15px;font-size: 14px;font-weight: bold;border-top-left-radius: 15px;border-top-right-radius: 15px;background-color: #191414;">
             <div>
               <span>Autor:</span>
               <span>##timelineitems.author##</span>
             </div>
 
-            <div class="box-message-info-date" style="margin-top: 5px;">
+            <div style="margin-top: 5px;">
               <span>Data:</span>
               <span>##timelineitems.date##</span>
             </div>
           </div>
 
-          <div class="box-message-text"
-            style="padding: 10px 0px 15px 15px;display: flex;flex-direction: row;background-color: #25524b;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-            <span style="width:100%;line-height: 20px;">
-              ##timelineitems.description##
-            </span>
-
-
-            <div
-              style="margin-left: 15px;padding: 15px 15px 15px 15px;max-width: 150px;border-left: 1px dashed #8d8181;text-decoration: none;text-align: center;font-size: 10px;color: #fefefe;">
-              ##FOREACH LAST 1 documents##
-              <a href="##document.downloadurl##">
-                <img src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
-                  alt="Download file icon" style="margin: auto auto 10px auto;width: 64px;height: 64px;">
-              </a>
-              <p style="line-height: 20px;">##document.filename##</p>
-              ##ENDFOREACHdocuments##
-            </div>
-          </div>
-          ##ENDFOREACHtimelineitems##
-        </div>
-
-        <h4 class="lasts-called-title"
-          style="padding: 15px;font-size: 16px;margin: auto;position: relative;box-sizing: border-box;background-color: #191414;border-radius: 15px;text-align: center;font-weight: bold;color: #fefefe;">
-          Últimos acompanhamentos</h4>
-
-        <ul style="margin-top: 25px;padding: 0px;">
-          ##FOREACH LAST 4 timelineitems##
-          <li class="box-message" style="position: relative;margin-bottom: 30px;list-style: none;color: #fefefe;">
-            <div class="box-message-info"
-              style="padding: 10px 15px;background-color: #191414;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;">
-              <div>
-                <span>Autor:</span>
-                <span>##timelineitems.author##</span>
-              </div>
-
-              <div class="box-message-info-date" style="margin-top: 5px;">
-                <span>Data:</span>
-                <span>##timelineitems.date##</span>
-              </div>
-            </div>
-
-            <div class="box-message-text"
-              style="padding: 10px 0px 15px 15px;display: flex;flex-direction: row;background-color: #221e1e;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
+          <div
+            style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #221e1e;">
+            <div>
               <span style="line-height: 20px;">
                 ##timelineitems.description##
               </span>
             </div>
-          </li>
-          ##ENDFOREACHtimelineitems##
-        </ul>
+            <div
+              style="margin-top: 15px;padding-top: 15px;font-size: 13px;font-weight: bold;border-top: 1px dashed white;">
 
+              ##IFtimelineitems.type=ITILFollowup##
+              <div><span>Tipo: </span>Acompanhamento</div>
+              ##ENDIFtimelineitems.type##
 
-        <h4 class="more-msg"
-          style="max-width: 450px;padding: 10px;font-size: 14px;margin: auto;position: relative;box-sizing: border-box;background-color: #191414;border-radius: 15px;text-align: center;font-weight: bold;color: #fefefe;">
-          + mensagens... (##ticket.numberoffollowups##)</h4>
+              ##IFtimelineitems.type=ITILSolution##
+              <div><span>Tipo: </span>Solução</div>
+              ##ENDIFtimelineitems.type##
+
+              ##IFtimelineitems.type=TicketTask##
+              ##FOREACH LAST 1 tasks##
+              <div><span>Tipo: </span>Tarefa (##task.status##)</div>
+              <div style="margin-top: 5px;"><span>Duração: </span>##task.time##</div>
+              <div style="margin-top: 5px;"><span>Atribuído Para: </span>##task.user##</div>
+              ##ENDFOREACHtasks##
+              ##ENDIFtimelineitems.type##
+            </div>
+          </div>
+        </div>
+        <span>##ENDFOREACHtimelineitems##</span>
+
+        <div style="border-left: 1px dotted black;border-right: 1px dotted black;">
+          <h4
+            style="padding: 15px;font-size: 16px;box-sizing: border-box;text-align: center;font-weight: bold;color: #fefefe;background-color: #221e1e;">
+            Últimos Acompanhamentos</h4>
+
+          <div style="padding: 0px;padding-left: 5px;padding-right: 5px;max-width: 540px;">
+            <div
+              style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;color: #fefefe;">
+              <div
+                style="padding: 15px 15px;font-size: 14px;font-weight: bold;text-align: center;border-top-left-radius: 15px;border-top-right-radius: 15px;background-color: #191414;">
+                <span>Arquivos</span>
+              </div>
+
+              <div
+                style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #221e1e;">
+                <ul
+                  style="margin-top: 0px;display: flex;flex-direction: row;justify-content: center;list-style: none;padding: 0px;">
+                  <span>##FOREACH LAST 4 documents##</span>
+                  <li
+                    style="padding-top: 15px;padding-left: 15px;padding-right: 15px;max-width: 150px;text-align: center;font-size: 10px;">
+                    <a href="##document.downloadurl##" style="text-decoration: none;color: #fefefe;">
+                      <img src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
+                        alt="Download file icon" style="margin: auto auto 10px auto;width: 36px;height: 36px;">
+                    </a>
+                    <p style="margin: 0px;">##document.filename##</p>
+                  </li>
+                  <span>##ENDFOREACHdocuments##</span>
+                </ul>
+              </div>
+            </div>
+
+            <ul style="display: flex;flex-direction: column;padding: 0px;">
+              <span>##FOREACH LAST 4 timelineitems##</span>
+
+              ##IFtimelineitems.position=left##
+              <li
+                style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;color: #fefefe;width: 100%;">
+                <div style="float: left;">
+                  <div
+                    style="padding: 15px 15px;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;background-color: #1e423d;">
+                    <div>
+                      <span>Autor:</span>
+                      <span>##timelineitems.author##</span>
+                    </div>
+
+                    <div style="margin-top: 5px;">
+                      <span>Data:</span>
+                      <span>##timelineitems.date##</span>
+                    </div>
+                  </div>
+
+                  <div
+                    style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #234640;">
+                    <div>
+                      <span style="line-height: 20px;">
+                        ##timelineitems.description##
+                      </span>
+                    </div>
+                    <div
+                      style="margin-top: 15px;padding-top: 15px;font-size: 13px;font-weight: bold;border-top: 1px dashed white;">
+                      ##IFtimelineitems.type=ITILFollowup##
+                      <div><span>Tipo: </span>Acompanhamento</div>
+                      ##ENDIFtimelineitems.type##
+
+                      ##IFtimelineitems.type=TicketTask##
+                      <div><span>Tipo: </span>Tarefa</div>
+                      ##ENDIFtimelineitems.type##
+
+                      ##IFtimelineitems.type=ITILSolution##
+                      <div><span>Tipo: </span>Solução</div>
+                      ##ENDIFtimelineitems.type##
+                    </div>
+                  </div>
+                </div>
+              </li>
+              ##ENDIFtimelineitems.position##
+
+              ##IFtimelineitems.position=right##
+              <li
+                style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;color: #fefefe;width: 100%;">
+                <div style="float: right;">
+                  <div
+                    style="padding: 15px 15px;font-size: 14px;font-weight: bold;border-top-left-radius: 15px;background-color: #191414;">
+                    <div>
+                      <span>Autor:</span>
+                      <span>##timelineitems.author##</span>
+                    </div>
+
+                    <div style="margin-top: 5px;">
+                      <span>Data:</span>
+                      <span>##timelineitems.date##</span>
+                    </div>
+                  </div>
+
+                  <div
+                    style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #221e1e;">
+                    <div>
+                      <span style="line-height: 20px;">
+                        ##timelineitems.description##
+                      </span>
+                    </div>
+                    <div
+                      style="margin-top: 15px;padding-top: 15px;font-size: 13px;font-weight: bold;border-top: 1px dashed white;">
+                      ##IFtimelineitems.type=ITILFollowup##
+                      <div><span>Tipo: </span>Acompanhamento</div>
+                      ##ENDIFtimelineitems.type##
+
+                      ##IFtimelineitems.type=TicketTask##
+                      <div><span>Tipo: </span>Tarefa</div>
+                      ##ENDIFtimelineitems.type##
+
+                      ##IFtimelineitems.type=ITILSolution##
+                      <div><span>Tipo: </span>Solução</div>
+                      ##ENDIFtimelineitems.type##
+                    </div>
+                  </div>
+                </div>
+              </li>
+              ##ENDIFtimelineitems.position##
+              <span>##ENDFOREACHtimelineitems##</span>
+            </ul>
+
+            <div
+              style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;margin-left: 0px;margin-right: 0px;">
+              <div
+                style="padding: 10px;font-size: 14px;font-weight: bold;text-align: center;color: #fefefe;background-color: #221e1e;position: relative;">
+                <span>+ mensagens... (ticket.numberofitems)</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
