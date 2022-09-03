@@ -73,7 +73,7 @@
       <table style="margin-top: 10px;padding-top: 30px;max-width: 100%;border-top: 1px dashed #191414;">
         <tr>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
-            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Status:</p>Processando
+            <p style="margin-right: 5px;display: inline;font-weight: bold;color: #191919;">Status:</p>
             ##ticket.status##
           </td>
           <td style="padding: 5px 15px;min-width: 30%;vertical-align: top;color: #191414;">
@@ -134,7 +134,7 @@
           <div
             style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #221e1e;">
             <div>
-              <span style="line-height: 20px;">
+              <span style="display: block;max-width: 420px;line-height: 20px;">
                 ##timelineitems.description##
               </span>
             </div>
@@ -176,112 +176,133 @@
 
               <div
                 style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #221e1e;">
-                <ul
-                  style="margin-top: 0px;display: flex;flex-direction: row;justify-content: center;list-style: none;padding: 0px;">
-                  <span>##FOREACH LAST 4 documents##</span>
-                  <li
-                    style="padding-top: 15px;padding-left: 15px;padding-right: 15px;max-width: 150px;text-align: center;font-size: 10px;">
-                    <a href="##document.downloadurl##" style="text-decoration: none;color: #fefefe;">
-                      <img src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
-                        alt="Download file icon" style="margin: auto auto 10px auto;width: 36px;height: 36px;">
-                    </a>
-                    <p style="margin: 0px;">##document.filename##</p>
-                  </li>
-                  <span>##ENDFOREACHdocuments##</span>
-                </ul>
+                <table style="width: 100%;">
+                  <tr>
+                    <td>##FOREACH LAST 4 documents##</td>
+                    <td
+                      style="padding-left: 15px;padding-right: 15px;max-width: 150px;text-align: center;font-size: 10px;">
+                      <a href="##document.downloadurl##" style="text-decoration: none;color: #fefefe;">
+                        <img
+                          src="https://github.com/nutecuneal/glpi-static-content/blob/main/imgs/icon-doc.png?raw=true"
+                          alt="Download file icon" style="margin: auto auto 10px auto;width: 36px;height: 36px;">
+                        <p style="margin: 0px;">##document.filename##</p>
+                      </a>
+                    </td>
+                    <td>##ENDFOREACHdocuments##</td>
+                  </tr>
+                </table>
               </div>
             </div>
 
-            <ul style="display: flex;flex-direction: column;padding: 0px;">
-              <span>##FOREACH LAST 4 timelineitems##</span>
+            <table>
+              <tr>
+                <td>##FOREACH LAST 4 timelineitems##</td>
+              </tr>
 
-              ##IFtimelineitems.position=left##
-              <li
-                style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;color: #fefefe;width: 100%;">
-                <div style="float: left;">
-                  <div
-                    style="padding: 15px 15px;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;background-color: #1e423d;">
-                    <div>
-                      <span>Autor:</span>
-                      <span>##timelineitems.author##</span>
-                    </div>
-
-                    <div style="margin-top: 5px;">
-                      <span>Data:</span>
-                      <span>##timelineitems.date##</span>
-                    </div>
-                  </div>
-
-                  <div
-                    style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #234640;">
-                    <div>
-                      <span style="line-height: 20px;">
-                        ##timelineitems.description##
-                      </span>
-                    </div>
+              <tr>
+                <td>##IFtimelineitems.position=left##</td>
+              </tr>
+              <tr>
+                <td
+                  style="position: relative;margin: auto;margin-top: 30px;max-width: 480px;min-width: 320px;list-style: none;color: #fefefe;width: 480px;">
+                  <div style="margin-top: 10px;float: left;">
                     <div
-                      style="margin-top: 15px;padding-top: 15px;font-size: 13px;font-weight: bold;border-top: 1px dashed white;">
-                      ##IFtimelineitems.type=ITILFollowup##
-                      <div><span>Tipo: </span>Acompanhamento</div>
-                      ##ENDIFtimelineitems.type##
+                      style="padding: 15px 15px;font-size: 14px;font-weight: bold;border-top-right-radius: 15px;background-color: #1e423d;">
+                      <div>
+                        <span>Autor:</span>
+                        <span>##timelineitems.author##</span>
+                      </div>
 
-                      ##IFtimelineitems.type=TicketTask##
-                      <div><span>Tipo: </span>Tarefa</div>
-                      ##ENDIFtimelineitems.type##
-
-                      ##IFtimelineitems.type=ITILSolution##
-                      <div><span>Tipo: </span>Solução</div>
-                      ##ENDIFtimelineitems.type##
-                    </div>
-                  </div>
-                </div>
-              </li>
-              ##ENDIFtimelineitems.position##
-
-              ##IFtimelineitems.position=right##
-              <li
-                style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;color: #fefefe;width: 100%;">
-                <div style="float: right;">
-                  <div
-                    style="padding: 15px 15px;font-size: 14px;font-weight: bold;border-top-left-radius: 15px;background-color: #191414;">
-                    <div>
-                      <span>Autor:</span>
-                      <span>##timelineitems.author##</span>
+                      <div style="margin-top: 5px;">
+                        <span>Data:</span>
+                        <span>##timelineitems.date##</span>
+                      </div>
                     </div>
 
-                    <div style="margin-top: 5px;">
-                      <span>Data:</span>
-                      <span>##timelineitems.date##</span>
-                    </div>
-                  </div>
-
-                  <div
-                    style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #221e1e;">
-                    <div>
-                      <span style="line-height: 20px;">
-                        ##timelineitems.description##
-                      </span>
-                    </div>
                     <div
-                      style="margin-top: 15px;padding-top: 15px;font-size: 13px;font-weight: bold;border-top: 1px dashed white;">
-                      ##IFtimelineitems.type=ITILFollowup##
-                      <div><span>Tipo: </span>Acompanhamento</div>
-                      ##ENDIFtimelineitems.type##
+                      style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #234640;">
+                      <div>
+                        <span style="display: block;max-width: 420px;line-height: 20px;">
+                          ##timelineitems.description##
+                        </span>
+                      </div>
+                      <div
+                        style="margin-top: 15px;padding-top: 15px;font-size: 13px;font-weight: bold;border-top: 1px dashed white;">
 
-                      ##IFtimelineitems.type=TicketTask##
-                      <div><span>Tipo: </span>Tarefa</div>
-                      ##ENDIFtimelineitems.type##
+                        ##IFtimelineitems.type=ITILFollowup##
+                        <div><span>Tipo: </span>Acompanhamento</div>
+                        ##ENDIFtimelineitems.type##
 
-                      ##IFtimelineitems.type=ITILSolution##
-                      <div><span>Tipo: </span>Solução</div>
-                      ##ENDIFtimelineitems.type##
+                        ##IFtimelineitems.type=TicketTask##
+                        <div><span>Tipo: </span>Tarefa</div>
+                        ##ENDIFtimelineitems.type##
+
+                        ##IFtimelineitems.type=ITILSolution##
+                        <div><span>Tipo: </span>Solução</div>
+                        ##ENDIFtimelineitems.type##
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              ##ENDIFtimelineitems.position##
-              <span>##ENDFOREACHtimelineitems##</span>
-            </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>##ENDIFtimelineitems.position##</td>
+              </tr>
+
+              <tr>
+                <td>##IFtimelineitems.position=right##</td>
+              </tr>
+              <tr>
+                <td
+                  style="position: relative;margin: auto;margin-top: 30px;max-width: 480px;min-width: 320px;list-style: none;color: #fefefe;width: 480px;">
+                  <div style="margin-top: 10px;float: right;">
+                    <div
+                      style="padding: 15px 15px;font-size: 14px;font-weight: bold;border-top-left-radius: 15px;background-color: #191414;">
+                      <div>
+                        <span>Autor:</span>
+                        <span>##timelineitems.author##</span>
+                      </div>
+
+                      <div style="margin-top: 5px;">
+                        <span>Data:</span>
+                        <span>##timelineitems.date##</span>
+                      </div>
+                    </div>
+
+                    <div
+                      style="padding: 20px 15px;font-size: 15px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;background-color: #221e1e;">
+                      <div>
+                        <span style="display: block;max-width: 420px;line-height: 20px;">
+                          ##timelineitems.description##
+                        </span>
+                      </div>
+                      <div
+                        style="margin-top: 15px;padding-top: 15px;font-size: 13px;font-weight: bold;border-top: 1px dashed white;">
+
+                        ##IFtimelineitems.type=ITILFollowup##
+                        <div><span>Tipo: </span>Acompanhamento</div>
+                        ##ENDIFtimelineitems.type##
+
+                        ##IFtimelineitems.type=TicketTask##
+                        <div><span>Tipo: </span>Tarefa</div>
+                        ##ENDIFtimelineitems.type##
+
+                        ##IFtimelineitems.type=ITILSolution##
+                        <div><span>Tipo: </span>Solução</div>
+                        ##ENDIFtimelineitems.type##
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>##ENDIFtimelineitems.position##</td>
+              </tr>
+
+              <tr>
+                <td>##ENDFOREACHtimelineitems##</td>
+              </tr>
+            </table>
 
             <div
               style="position: relative;margin: auto;margin-top: 30px;max-width: 500px;min-width: 320px;list-style: none;margin-left: 0px;margin-right: 0px;">
