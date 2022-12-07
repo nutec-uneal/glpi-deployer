@@ -2,11 +2,6 @@ FROM php:7.4-apache
 
 EXPOSE 80
 
-# Variables (default values)
-ARG PATH_CONF_STORE=/etc/glpi
-ARG PATH_DATA_STORE=/var/lib/glpi
-ARG PATH_LOG_STORE=/var/log/glpi
-
 # Install system apps
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -44,9 +39,9 @@ RUN chmod 600 /etc/cron.d/cron-task
 RUN crontab /etc/cron.d/cron-task
 
 # Config: GLPI data folders
-RUN mkdir $PATH_DATA_STORE
-RUN mkdir $PATH_CONF_STORE
-RUN mkdir $PATH_LOG_STORE
+RUN mkdir /etc/glpi
+RUN mkdir /var/lib/glpi
+RUN mkdir /var/log/glpi
 
 # Config: set app files
 COPY configs/php/downstream.php /var/www/html/inc
