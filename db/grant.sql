@@ -12,7 +12,7 @@ GRANT
     SHOW VIEW,
     TRIGGER,
     DROP
-ON *.* TO 'test'@'%' IDENTIFIED BY 'test';
+ON *.* TO 'username'@'%' IDENTIFIED BY 'userpass';
 
 GRANT
     CREATE,
@@ -20,4 +20,4 @@ GRANT
     CREATE TEMPORARY TABLES,
     EVENT,
     LOCK TABLES
-ON db_glpi.* TO 'test'@'%' IDENTIFIED BY 'test';
+ON db_glpi.* TO 'username'@'%' IDENTIFIED BY 'userpass';
