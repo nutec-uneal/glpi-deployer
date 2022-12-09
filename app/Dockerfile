@@ -22,8 +22,11 @@ RUN install-php-extensions ldap xmlrpc apcu exif bz2 zip opcache
 
 ### Config: OPCache
 RUN echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+
 ### Config: "php.ini" mode (default "production", alternative "development")
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
+RUN sed -e 's/session.cookie_httponly =.*/session.cookie_httponly = on/' -i /usr/local/etc/php/php.ini
 
 # Copy GLPI app to container
 COPY glpi/ /var/www/html
@@ -52,4 +55,4 @@ RUN chown -R www-data:www-data /var/www/html/marketplace
 
 WORKDIR /var/www/html
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

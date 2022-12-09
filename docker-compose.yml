@@ -5,7 +5,7 @@ services:
       context: ./app/
     container_name: glpi-app
     ports:
-      - '0.0.0.0:5000:80'
+      - '0.0.0.0:80:80'
     volumes:
       - '/hostPath/config:/etc/glpi'
       - '/hostPath/data:/var/lib/glpi'
@@ -15,7 +15,7 @@ services:
       glpi-network:
         ipv4_address: 172.18.0.3
     depends_on:
-      - glpi-db: null
+      db:
         condition: service_healthy
     restart: always
   db:
@@ -34,10 +34,23 @@ services:
       glpi-network:
         ipv4_address: 172.18.0.2
     restart: always
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'mysqladmin',
+          'ping',
+          '--host=localhost',
+          '--user=root'
+        ]
+      interval: 1m
+      timeout: 30s
+      retries: 3
+      start_period: 10s
 networks:
   glpi-network:
     ipam:
-      driver: bridge
+      driver: default
       config:
         - subnet: 172.18.0.0/28
           gateway: 172.18.0.1
