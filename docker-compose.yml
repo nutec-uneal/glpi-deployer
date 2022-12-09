@@ -43,10 +43,10 @@ services:
           '--host=localhost',
           '--user=root'
         ]
-      interval: 1m
+      interval: 3m
       timeout: 30s
       retries: 3
-      start_period: 10s
+      start_period: 30s
 networks:
   glpi-network:
     ipam:
