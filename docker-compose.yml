@@ -21,6 +21,19 @@ services:
       db:
         condition: service_healthy
     restart: always
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'curl',
+          '-fs',
+          '--insecure',
+          'https://localhost'
+        ]
+      interval: 3m
+      timeout: 30s
+      retries: 3
+      start_period: 30s
   db:
     image: 'mariadb:10.8.3'
     container_name: glpi-db
