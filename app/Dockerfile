@@ -1,11 +1,11 @@
-FROM php:7.4-apache
+FROM php:8.1-apache
 
 EXPOSE 80
 
 # Install system apps
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install nano cron supervisor -y
+RUN apt-get install cron supervisor -y
 
 # PHP EXTENSIONS (dependencies)
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
