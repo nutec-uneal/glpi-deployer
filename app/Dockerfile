@@ -1,7 +1,6 @@
 FROM php:7.4-apache
 
 EXPOSE 80
-EXPOSE 443
 
 # Install system apps
 RUN apt-get update
@@ -31,13 +30,9 @@ RUN sed -e 's/session.cookie_httponly =.*/session.cookie_httponly = on/' -i /usr
 
 ### Config: Apache
 COPY configs/apache2/sites-available/glpi.domain.conf /etc/apache2/sites-available/
-COPY configs/apache2/sites-available/glpi.domain-ssl.conf /etc/apache2/sites-available/
 
 RUN rm /etc/apache2/sites-enabled/*
 RUN a2ensite glpi.domain.conf
-RUN a2ensite glpi.domain-ssl.conf
-
-RUN a2enmod ssl
 
 # Copy GLPI app to container
 COPY glpi/ /var/www/html

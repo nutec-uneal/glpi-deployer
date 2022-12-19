@@ -5,14 +5,11 @@ services:
       context: ./app/
     container_name: glpi-app
     ports:
-      - '0.0.0.0:80:80'
-      - '0.0.0.0:443:443'
+      - '80:80'
     volumes:
       - '/hostPath/config:/etc/glpi'
       - '/hostPath/data:/var/lib/glpi'
       - '/hostPath/log:/var/log/glpi'
-      - '/hostPath/filecert.pem:/etc/ssl/certs/cert-glpi.pem:ro'
-      - '/hostPath/filecert.key:/etc/ssl/private/cert-glpi.key:ro'
     # - './app/glpi/install:/var/www/html/install'
     networks:
       glpi-network:
@@ -27,8 +24,7 @@ services:
           'CMD',
           'curl',
           '-fs',
-          '--insecure',
-          'https://localhost'
+          'http://localhost'
         ]
       interval: 3m
       timeout: 30s
