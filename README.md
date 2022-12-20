@@ -8,7 +8,7 @@
     - [Requisitos e Dependências](#requisitos-e-dependências)
       - [Docker](#docker)
       - [Aplicação GLPI](#aplicação-glpi)
-  - [Preparação](#preparação)
+  - [Preparação de Ambiente](#preparação-de-ambiente)
     - [Docker:](#docker-1)
     - [GLPI:](#glpi)
   - [Instalação](#instalação)
@@ -17,6 +17,8 @@
     - [Configuração de Permissões](#configuração-de-permissões)
       - [Banco de Dados](#banco-de-dados)
       - [Aplicação - GLPI](#aplicação---glpi)
+    - [Configurando Proxy Reverso - Nginx](#configurando-proxy-reverso---nginx)
+    - [Finalização](#finalização)
 - [Intalação com backup (Migração/Restauração)](#intalação-com-backup-migraçãorestauração)
   - [OBSERVAÇÕES](#observações)
 
@@ -41,7 +43,7 @@ GLPI é um sistema de código aberto escrito em PHP para Gerenciamento de Ativos
 - Versões Testadas: 10.0.2 (INSEGURA), 10.0.5.
 
 
-## Preparação
+## Preparação de Ambiente
 
 ### Docker:
 
@@ -124,7 +126,7 @@ ports:
 #   aponte para as pastas criadas anteriomente.
 # Ficando:
 volumes:
-  - '**/dirconfig:/etc/glAltere aspi'
+  - '**/dirconfig:/etc/glpi'
   - '**/dirdata/:/var/lib/glpi'
   - '**/dirlog:/var/log/glpi'
 
@@ -198,7 +200,7 @@ $ mariadb -u root -p
 #### Aplicação - GLPI
 ```bash
 # Entre no container através do comando
-$ sudo docker exec -it glpi /bin/bash
+$ sudo docker exec -it glpi-app /bin/bash
 
 # Execute 
 $ chown -R www-data:www-data /etc/glpi 
@@ -206,34 +208,32 @@ $ chown -R www-data:www-data /var/lib/glpi
 $ chown -R www-data:www-data /var/log/glpi
 ```
 
+### Configurando Proxy Reverso - Nginx
 
+Para adicionar uma camada a mais de segurança recomendamos usar alguma aplicação de proxy reverso, como por exemplo o Nginx. Isso permite esconder o servidor Apache do usuário final além de tornar mais fácil e escalável configurar coisas como HTTPS, redirecionamentos, etc.
 
-Informações para acesso local:
-  - GLPI: 172.16.1.3:80 ou "localhost:portaGLPI" ou "ipHost:portaGLPI"
-  - GLPI Banco de Dados: 172.16.1.2:3306 ou "localhost:3306"
+- [Guia para instalação e configuração do Nginx](https://github.com/nutecuneal/nginx-rproxy-deploy)
 
-Agora, em seu navegador acesse a aplicação GLPI. Faça a configuração seguindo o [manual de instalação](https://glpi-install.readthedocs.io/en/latest/install/wizard.html).
+### Finalização
+
+A partir de seu navegador acesse o domínio/IP e a porta configurada no servidor.
+
+Siga o [*Intall-Wizard GLPI*](https://glpi-install.readthedocs.io/en/latest/install/wizard.html) para concluir o processo.
 
 <br>
 
-Por motivo de segurança recomenda-se remover a pasta de instalação de dentro do código da aplicação. Por isso, faça:
+**Obs**: Por motivo de segurança recomenda-se remover a pasta de instalação de dentro do código da aplicação. Por isso, faça:
 
 
-```dockerfile
-#  Em "docker-compose.yml"
-# Service: glpi
-## Comente a linha (inserindo "#"
-## (Antes)
-"- ./main/glpi/install:/var/www/html/install"
-## (Depois)
-"# - ./main/glpi/install:/var/www/html/install"
-```
 ```bash
 # Remova os containers
-$ sudo docker rm -f glpi glpi-db
+$ sudo docker rm -f glpi-app glpi-db
 
 # Remova o imagem
 $ sudo docker rmi -f glpi-deploy-glpi
+
+# Remova os caches de build
+$ docker builder prune -a
 
 # Execute os containers novamente
 $ sudo docker-compose -f docker-compose.yml up
