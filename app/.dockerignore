@@ -1,12 +1,13 @@
-# Git
+# Git and cache
 .git
 .gitignore
+.cache
 
 # Docker
 .dockerignore
 docker-compose*
 Dockerfile
 
-# Directory glpi install
-**/*/glpi/install
+# Directories glpi
+**/glpi/install
 
