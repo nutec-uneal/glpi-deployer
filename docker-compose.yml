@@ -31,7 +31,7 @@ services:
       retries: 3
       start_period: 30s
   db:
-    image: 'mariadb:10.8.3'
+    image: 'mariadb:10.9.4'
     container_name: glpi-db
     ports:
       - '127.0.0.1:3306:3306'
