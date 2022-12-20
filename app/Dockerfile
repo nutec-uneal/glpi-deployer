@@ -29,23 +29,22 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 RUN sed -e 's/session.cookie_httponly =.*/session.cookie_httponly = on/' -i /usr/local/etc/php/php.ini
 
 ### Config: Apache
-COPY configs/apache2/sites-available/glpi.domain.conf /etc/apache2/sites-available/
+COPY config-apache2/sites-available/glpi.domain.conf /etc/apache2/sites-available/
 
 RUN rm /etc/apache2/sites-enabled/*
 RUN a2ensite glpi.domain.conf
 
 # Copy GLPI app to container
 COPY glpi/ /var/www/html
-RUN rm -rf /var/www/html/install/*
 
 # Config: supervisord
 RUN mkdir -p /var/log/supervisor
-COPY configs/utils/supervisord.conf /etc/supervisord.conf
+COPY configs/supervisord.conf /etc/supervisord.conf
 
 # Config: cron
-COPY configs/utils/cron-task /etc/cron.d/cron-task
-RUN chmod 600 /etc/cron.d/cron-task
-RUN crontab /etc/cron.d/cron-task
+COPY configs/glpi-task-cron /etc/cron.d
+RUN chmod 600 /etc/cron.d/glpi-task-cron
+RUN crontab /etc/cron.d/glpi-task-cron
 
 # Config: GLPI data folders
 RUN mkdir /etc/glpi
@@ -53,7 +52,7 @@ RUN mkdir /var/lib/glpi
 RUN mkdir /var/log/glpi
 
 # Config: set app files
-COPY configs/php/downstream.php /var/www/html/inc
+COPY config-app/downstream.php /var/www/html/inc
 
 # Config: files permission
 RUN chown -R www-data:www-data /var/www/html/config
