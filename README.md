@@ -214,6 +214,14 @@ Para adicionar uma camada a mais de segurança recomendamos usar alguma aplicaç
 
 - [Guia para instalação e configuração do Nginx](https://github.com/nutecuneal/nginx-rproxy-deploy)
 
+Por questão de segurança a rede do Nginx e do GLPI foram projetas para manter o isolamento dos containers. Por isso, execute o comando abaixo para permitir a comunicação entre containers:
+
+```bash
+# Adicione as permissões na "iptables"
+$ iptables -I DOCKER-USER -s IP-GLPI -d IP-NGINX -j ACCEPT
+$ iptables -I DOCKER-USER -s IP-NGINX -d IP-GLPI -j ACCEPT
+```
+
 ### Finalização
 
 A partir de seu navegador acesse o domínio/IP e a porta configurada no servidor.
