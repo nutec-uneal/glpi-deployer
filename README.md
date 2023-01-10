@@ -15,6 +15,7 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
       - [Banco de Dados](#banco-de-dados)
       - [Aplicação](#aplicação)
     - [Docker-Compose](#docker-compose)
+      - [Rede](#rede)
       - [Portas](#portas)
       - [Variáveis de Ambiente (Environment)](#variáveis-de-ambiente-environment)
       - [Volumes](#volumes)
@@ -26,7 +27,7 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
     - [Finalização](#finalização)
       - [Segurança](#segurança)
         - [Pasta de Instalção](#pasta-de-instalção)
-- [Intalação com backup (Migração/Restauração)](#intalação-com-backup-migraçãorestauração)
+  - [Backup/Migração/Restauração](#backupmigraçãorestauração)
   - [OBSERVAÇÕES](#observações)
 
 ## Requisitos e Dependências
@@ -63,6 +64,8 @@ $ sudo systemctl enable docker.service
 2. Extraia o arquivo ***glpi-{version}.tgz***. Copie a pasta extraída para ***$(pwd)/glpi-deployer/app***. 
 
 Obs: ***$(pwd)*** simboliza um caminho qualquer na máquina do usuário. Ajuste-o de acordo com suas preferências/necessidades.
+
+<br>
 
 ## Instalação
 
@@ -117,23 +120,14 @@ $ cp $(pwd)/glpi-deployer/app/config-app/local_define.php $(pwd)/etc-glpi
 
 ### Docker-Compose
 
-```
-# Comente a linha que ignora a pasta de instalação do GLPI.
-
-# Antes
-**/glpi/install
-
-# Depois
-# **/glpi/install
-```
+#### Rede
 
 ```yml
 # docker-compose.yml (Em networks.glpi-net.ipam)
 # Altere os valores caso necessário. 
 
 config:
-# Endereço da redeSugestão (no Linux):
-  - Dir. Dados: */var/lib/mysqlglpi*
+# Endereço da rede
   - subnet: '172.18.0.0/28'
 # Gateway da rede
     gateway: 172.18.0.1
@@ -143,19 +137,11 @@ config:
 # docker-compose.yml (Em services.app.networks)
 # Altere os valores caso necessário.
 
-- glpi-net:
-# Endereço do container```
-# Comente a linha que ignora a pasta de instalação do GLPI.
-
-# Antes
-**/glpi/install
-
-# Depois
-# **/glpi/install
+glpi-net:
+# Endereço do container
+  ipv4_address: 172.18.0.3
 ```
-```
-Sugestão (no Linux):
-  - Dir. Dados: */var/lib/mysqlglpi*
+
 ```yml
 # docker-compose.yml (Em services.db.networks)
 # Altere os valores caso necessário. 
@@ -207,7 +193,7 @@ environment:
 # Senha do usuário
   - MARIADB_PASSWORD=userpass
 ```
-novamente
+
 #### Volumes
 
 ```yml
@@ -331,9 +317,7 @@ $ docker builder prune -a
 $ sudo docker-compose -f docker-compose.yml up
 ```
 
-
-
-# Intalação com backup (Migração/Restauração)
+## Backup/Migração/Restauração
 
 ## OBSERVAÇÕES
 
