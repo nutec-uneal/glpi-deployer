@@ -25,8 +25,8 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
       - [Aplicação - GLPI](#aplicação---glpi)
     - [Configurando Proxy Reverso](#configurando-proxy-reverso)
     - [Finalização](#finalização)
-      - [Segurança](#segurança)
-        - [Pasta de Instalção](#pasta-de-instalção)
+    - [Segurança](#segurança)
+      - [Pasta de Instalção](#pasta-de-instalção)
   - [Backup/Migração/Restauração](#backupmigraçãorestauração)
   - [OBSERVAÇÕES](#observações)
 
@@ -49,13 +49,13 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
 # Em algumas distribuições Linux.
 
 # Verifique se o Docker está executando.
-$ sudo systemctl status docker.service
+$ systemctl status docker.service
 
 # Inicie o Docker (caso necessário).
-$ sudo systemctl start docker.service
+$ systemctl start docker.service
 
 # Para fazer o Docker iniciar junto com o Sistema Operacional.
-$ sudo systemctl enable docker.service  
+$ systemctl enable docker.service  
 ```
 
 ### GLPI:
@@ -109,6 +109,8 @@ $ cp $(pwd)/glpi-deployer/app/config-app/local_define.php $(pwd)/etc-glpi
 ```
 
 ```
+# app/.dockerignore
+
 # Comente a linha que ignora a pasta de instalação do GLPI.
 
 # Antes
@@ -131,24 +133,6 @@ config:
   - subnet: '172.18.0.0/28'
 # Gateway da rede
     gateway: 172.18.0.1
-```
-
-```yml
-# docker-compose.yml (Em services.app.networks)
-# Altere os valores caso necessário.
-
-glpi-net:
-# Endereço do container
-  ipv4_address: 172.18.0.3
-```
-
-```yml
-# docker-compose.yml (Em services.db.networks)
-# Altere os valores caso necessário. 
-
-- glpi-net:
-# Endereço do container
-  ipv4_address: 172.18.0.2
 ```
 
 #### Portas
@@ -254,7 +238,7 @@ Acesse o banco de dados com um utExecutando Docker-Composeilitário gráfico ou 
 # Via terminal
 
 # Entre no container
-$ sudo docker exec -it glpi-db /bin/bash
+$ docker exec -it glpi-db /bin/bash
 
 # Entre no SGBD (com o usuário root e senha root)
 $ mariadb -u root -p
@@ -269,7 +253,7 @@ Executando Docker-Compose
 # No terminal
 
 # Entre no container
-$ sudo docker exec -it glpi-app /bin/bash
+$ docker exec -it glpi-app /bin/bash
 
 # Execute 
 $ chown -R www-data:www-data /etc/glpi 
@@ -287,13 +271,17 @@ A partir de seu navegador acesse o domínio/IP e a porta configurada no servidor
 
 Siga o [*Intall-Wizard GLPI*](https://glpi-install.readthedocs.io/en/latest/install/wizard.html) para concluir o processo.
 
-#### Segurança
+Dica: você poderá localizar os containers na rede através de seus IPs, para inspecionar isso use o comando *docker inspect CONTAINER_NAME*. Ou - recomendado - usando o nome do serviço: *glpi-app* e *glpi-db*.
 
-##### Pasta de Instalção
+### Segurança
+
+#### Pasta de Instalção
 
 Por motivo de segurança recomenda-se remover a pasta de instalação de dentro do código da aplicação. Por isso, faça:
 
 ```
+# app/.dockerignore
+
 # Descomente a linha que ignora a pasta de instalação do GLPI.
 
 # Antes
@@ -305,16 +293,16 @@ Por motivo de segurança recomenda-se remover a pasta de instalação de dentro 
 
 ```bash
 # Remova os containers
-$ sudo docker rm -f glpi-app glpi-db
+$ docker rm -f glpi-app glpi-db
 
 # Remova o imagem
-$ sudo docker rmi -f glpi-deployer-glpi
+$ docker rmi -f glpi-deployer-glpi
 
 # Remova os caches de build
 $ docker builder prune -a
 
 # Execute o Docker-Compose novamente
-$ sudo docker-compose -f docker-compose.yml up
+$ docker-compose -f docker-compose.yml up
 ```
 
 ## Backup/Migração/Restauração
