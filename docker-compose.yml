@@ -12,8 +12,7 @@ services:
       - '$(pwd)/lib_glpi:/var/lib/glpi'
       - '$(pwd)/log_glpi:/var/log/glpi'
     networks:
-      - glpi-net:
-        ipv4_address: 172.18.0.3
+      - glpi-net
     depends_on:
       db:
         condition: service_healthy
@@ -38,8 +37,7 @@ services:
       - MARIADB_USER=username
       - MARIADB_PASSWORD=userpass
     networks:
-      - glpi-net:
-        ipv4_address: 172.18.0.2
+      - glpi-net
     restart: unless-stopped
     healthcheck:
       test:
