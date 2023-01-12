@@ -1,10 +1,10 @@
-# GLPI Deploy
+# GLPI Deployer
 
 O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em PHP para Gerenciamento de Ativos de TI, rastreamento de problemas e central de serviços. [GPLI Documentação](https://glpi-project.org/pt-br/documentacao/).
 
 ## Sumário
 
-- [GLPI Deploy](#glpi-deploy)
+- [GLPI Deployer](#glpi-deployer)
   - [Sumário](#sumário)
   - [Requisitos e Dependências](#requisitos-e-dependências)
   - [Instalação](#instalação)
