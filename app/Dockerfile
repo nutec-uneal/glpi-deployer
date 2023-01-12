@@ -34,6 +34,8 @@ COPY config-apache2/sites-available/glpi.domain.conf /etc/apache2/sites-availabl
 RUN rm /etc/apache2/sites-enabled/*
 RUN a2ensite glpi.domain.conf
 
+RUN a2enmod remoteip
+
 # Copy GLPI app to container
 COPY glpi/ /var/www/html
 
