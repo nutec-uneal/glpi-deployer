@@ -7,10 +7,8 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
 - [GLPI Deploy](#glpi-deploy)
   - [Sumário](#sumário)
   - [Requisitos e Dependências](#requisitos-e-dependências)
-  - [Preparação de Ambiente](#preparação-de-ambiente)
-    - [Docker:](#docker)
-    - [GLPI:](#glpi)
   - [Instalação](#instalação)
+    - [Preparação de Ambiente](#preparação-de-ambiente)
     - [Estrutura de Diretório](#estrutura-de-diretório)
       - [Banco de Dados](#banco-de-dados)
       - [Aplicação](#aplicação)
@@ -27,8 +25,6 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
     - [Finalização](#finalização)
     - [Segurança](#segurança)
       - [Pasta de Instalção](#pasta-de-instalção)
-  - [Backup/Migração/Restauração](#backupmigraçãorestauração)
-  - [OBSERVAÇÕES](#observações)
 
 ## Requisitos e Dependências
 
@@ -40,34 +36,17 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
 
 - Versões Testadas: 10.0.2 (INSEGURA), 10.0.5.
 
-## Preparação de Ambiente
-
-### Docker:
-
-```bash
-# Certifique-se que a aplicação está executando.
-# Em algumas distribuições Linux.
-
-# Verifique se o Docker está executando.
-$ systemctl status docker.service
-
-# Inicie o Docker (caso necessário).
-$ systemctl start docker.service
-
-# Para fazer o Docker iniciar junto com o Sistema Operacional.
-$ systemctl enable docker.service  
-```
-
-### GLPI:
-
-1. Baixe o GLPI através do links disponibilizados.
-2. Extraia o arquivo ***glpi-{version}.tgz***. Copie a pasta extraída para ***$(pwd)/glpi-deployer/app***. 
-
-Obs: ***$(pwd)*** simboliza um caminho qualquer na máquina do usuário. Ajuste-o de acordo com suas preferências/necessidades.
-
 <br>
 
 ## Instalação
+
+### Preparação de Ambiente
+
+1. Baixe o GLPI através dos links disponibilizados.
+2. Extraia o arquivo ***glpi-{version}.tgz***.
+3. Copie a pasta extraída para ***$(pwd)/glpi-deployer/app***. 
+
+Obs.: ***$(pwd)*** simboliza um caminho qualquer na máquina do usuário. Ajuste-o de acordo com suas preferências/necessidades.
 
 ### Estrutura de Diretório
 
@@ -155,10 +134,12 @@ ports:
 
 # Comente/Descomente (e/ou altere) as portas/serviços que você deseja oferecer.
 
-# Cuida, isso pode expor seu banco para outros hosts.
-# Só altere se isso realmente for desejado.
+# Cuidado, isso pode expor seu banco para outros hosts.
+# Só altere se realmente for desejado.
 
 ports:
+# Bind "localhost" com o container.
+# Porta padrão Mysql/MariaDB 
   - '127.0.0.1:3306:3306'
 ```
 
@@ -170,7 +151,7 @@ ports:
 environment:
 # Senha do usuário root
   - MARIADB_ROOT_PASSWORD=rootpass
-# Host do root. "localhost" ou "%"(não recomendado)
+# Host do root. "localhost" ou ["%"(não recomendado)]
   - MARIADB_ROOT_HOST=localhost
 # Nome do usuário criado 
   - MARIADB_USER=username
@@ -221,9 +202,12 @@ $ docker-compose -f docker-compose.yml up
 #### Banco de Dados
 
 ```sql
-/* # db/grant.sql */
+/*
+ db/grant.sql
 
-/*  Linhas 15 e 23 (Todos os locais). */
+ Linhas 15 e 23 (Todos os locais).
+*/
+
 ... TO 'username'@'%' IDENTIFIED BY 'userpass'; 
 
 ```
@@ -232,7 +216,7 @@ $ docker-compose -f docker-compose.yml up
 2. Substitua ***userpass*** pelo valor inserido em ***MARIADB_PASSWORD***.
 3. Ao configurar a aplicação o banco de deve ser inserido como ***db_glpi***. Caso opte por utilizar outro nome substitua o termo ***db_glpi*** na linha 23 pelo de sua preferência.
 
-Acesse o banco de dados com um utExecutando Docker-Composeilitário gráfico ou via terminal e execute os comandos do arquivos mencionado.
+Acesse o banco de dados utilizando uma aplicação gráfica ou via terminal.
 
 ```bash
 # Via terminal
@@ -244,13 +228,14 @@ $ docker exec -it glpi-db /bin/bash
 $ mariadb -u root -p
 
 # Agora cole - um por vez - os dois comando.
+
 # Certifique-se de ter feitos as alterações.
 ```
-Executando Docker-Compose
+
 #### Aplicação - GLPI
 
 ```bash
-# No terminal
+# Via terminal
 
 # Entre no container
 $ docker exec -it glpi-app /bin/bash
@@ -263,15 +248,14 @@ $ chown -R www-data:www-data /var/log/glpi
 
 ### Configurando Proxy Reverso
 
-Para adicionar uma camada a mais de segurança recomendamos usar alguma aplicação de proxy reverso, como por exemplo o Nginx. Isso permite esconder o servidor Apache do usuário final além de tornar mais fácil e escalável configurar coisas como HTTPS, redirecionamentos, etc. [Guia para instalação de um proxy manager](https://github.com/nutecuneal/proxy-manager-deployer/tree/feature).
+> Para adicionar uma camada a mais de segurança recomendamos usar alguma aplicação de proxy reverso, como por exemplo o Nginx. Isso permite esconder o servidor Apache do usuário final além de tornar mais fácil e escalável configurar coisas como HTTPS, redirecionamentos, etc. [Guia para instalação de um Proxy Manager](https://github.com/nutecuneal/proxy-manager-deployer).
 
 ### Finalização
 
-A partir de seu navegador acesse o domínio/IP e a porta configurada no servidor.
+1. A partir de seu navegador acesse o domínio/IP e a porta configurada no servidor.
+2. Siga o [*Intall-Wizard GLPI*](https://glpi-install.readthedocs.io/en/latest/install/wizard.html) para concluir o processo.
 
-Siga o [*Intall-Wizard GLPI*](https://glpi-install.readthedocs.io/en/latest/install/wizard.html) para concluir o processo.
-
-Dica: você poderá localizar os containers na rede através de seus IPs, para inspecionar isso use o comando *docker inspect CONTAINER_NAME*. Ou - recomendado - usando o nome do serviço: *glpi-app* e *glpi-db*.
+Dica.: você poderá localizar os containers na rede através de seus IPs, para inspecionar isso use o comando "***docker inspect CONTAINER_NAME***". Ou simplesmene use o "***alias***" do container - "**glpi-app**" e/ou "**glpi-db**" - como se fosse um **Hostname/DNS**.
 
 ### Segurança
 
@@ -295,7 +279,7 @@ Por motivo de segurança recomenda-se remover a pasta de instalação de dentro 
 # Remova os containers
 $ docker rm -f glpi-app glpi-db
 
-# Remova o imagem
+# Remova a imagem
 $ docker rmi -f glpi-deployer-glpi
 
 # Remova os caches de build
@@ -304,27 +288,3 @@ $ docker builder prune -a
 # Execute o Docker-Compose novamente
 $ docker-compose -f docker-compose.yml up
 ```
-
-## Backup/Migração/Restauração
-
-## OBSERVAÇÕES
-
-Dentro do GLPI:
-
-- Autenticação e destinatário.
-- Adicionar Remetente.
-- `Geral:Assistência:Permitir abertura de chamados anônimos`
-- `Configurar:notifições:notifições`
-
-Ações automáticas:
-
-- mailgate *(Puxa os chamados que vem do email)*
-- queuednotification *(Envio da fila de notificação)*
-
-Tarefa automática:
-
-- Periodo de execução: É o horário em que a tarefa pode ser executada, ex: de 0 horas até 24 horas, daquele dia.
-
-TO-DO:
-
-**Verificar o modelo de resposta ao usuário do chamado**.
