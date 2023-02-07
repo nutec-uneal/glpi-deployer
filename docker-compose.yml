@@ -1,67 +1,63 @@
-version: "3.9"
+version: '3.9'
 
 services:
-  glpi:
+  app:
     build:
-      context: ./main/
-      args:
-        - PATH_CONF_STORE=/etc/glpi
-        - PATH_DATA_STORE=/var/lib/glpi
-        - PATH_LOG_STORE=/var/log/glpi
-    ports:
-      - "5000:80"
+      context: './app/'
+    container_name: 'glpi-app'
+    #ports:
+    # - '80:80'
+    volumes:
+      - '$(pwd)/etc_glpi:/etc/glpi'
+      - '$(pwd)/lib_glpi:/var/lib/glpi'
+      - '$(pwd)/log_glpi:/var/log/glpi'
+    networks:
+      - glpi-net
     depends_on:
-      - glpi-db
-    networks:
-      glpi-net:
-        ipv4_address: 172.16.1.3
-    restart: always
-    #healthcheck:
-    #  test: [ "CMD", "curl", "-f", "http://localhost:5000" ]
-    #  interval: 3m
-    #  timeout: 30s
-    #  retries: 5
-    #  start_period: 30s
-    container_name: glpi
-    volumes:
-      - ~/glpi-storage/config:/etc/glpi
-      - ~/glpi-storage/data:/var/lib/glpi
-      - ~/glpi-storage/log:/var/log/glpi
-    # - ./main/glpi/install:/var/www/html/install
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: [ 'CMD', 'curl', '-fs', 'http://localhost' ]
+      interval: 3m
+      timeout: 30s
+      retries: 3
+      start_period: 30s
 
-  glpi-db:
-    image: mariadb:10.8.3
-    ports:
-      - "127.0.0.1:3306:3306"
-    env_file:
-      - ./database/.env
-    networks:
-      glpi-net:
-        ipv4_address: 172.16.1.2
-    restart: always
-    #healthcheck:
-    #  test:
-    #    [
-    #      "CMD",
-    #      "mysqladmin",
-    #      "ping",
-    #      "-h",
-    #      "127.0.0.1",
-    #      "-u",
-    #      "root",
-    #      "--password=$$MARIADB_ROOT_PASSWORD"
-    #    ]
-    #  interval: 3m
-    #  timeout: 30s
-    #  retries: 5
-    #  start_period: 30s
-    container_name: glpi-db
+  db:
+    image: 'mariadb:10.9.4'
+    container_name: 'glpi-db'
+    #ports:
+    #  - '127.0.0.1:3306:3306'
     volumes:
-      - ~/glpi-storage/database:/var/lib/mysql
+      - '$(pwd)/lib-mysql:/var/lib/mysql'
+    environment:
+      - MARIADB_ROOT_PASSWORD=rootpass
+      - MARIADB_ROOT_HOST=localhost
+      - MARIADB_USER=username
+      - MARIADB_PASSWORD=userpass
+    networks:
+      - glpi-net
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'mysqladmin',
+          'ping',
+          '--host=localhost',
+          '--user=root'
+        ]
+      interval: 3m
+      timeout: 30s
+      retries: 3
+      start_period: 30s
 
 networks:
   glpi-net:
+    name: 'glpi-net'
     ipam:
       driver: default
       config:
-        - subnet: "172.16.1.0/24"
+        - subnet: '172.18.0.0/28'
+          gateway: 172.18.0.1

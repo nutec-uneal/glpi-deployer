@@ -1,223 +1,294 @@
-# GLPI Deploy
+# GLPI Deployer
 
-## Pré-instalação (Requisitos)
+O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em PHP para Gerenciamento de Ativos de TI, rastreamento de problemas e central de serviços. [GPLI Documentação](https://glpi-project.org/pt-br/documentacao/).
 
-### Downloads
+## Sumário
 
-#### Projeto GLPI-Deploy
-- ```bash
-  # Clone o repositório do projeto.
-  # 1. Ou clicando na botão download no site do Github.
-  # 2. Ou Executando o comando abaixo (Necessário autenticação).
+- [GLPI Deployer](#glpi-deployer)
+  - [Sumário](#sumário)
+  - [Requisitos e Dependências](#requisitos-e-dependências)
+  - [Instalação](#instalação)
+    - [Preparação de Ambiente](#preparação-de-ambiente)
+    - [Estrutura de Diretório](#estrutura-de-diretório)
+      - [Banco de Dados](#banco-de-dados)
+      - [Aplicação](#aplicação)
+    - [Docker-Compose](#docker-compose)
+      - [Rede](#rede)
+      - [Portas](#portas)
+      - [Variáveis de Ambiente (Environment)](#variáveis-de-ambiente-environment)
+      - [Volumes](#volumes)
+    - [Executando Docker-Compose](#executando-docker-compose)
+    - [Configuração de Permissões](#configuração-de-permissões)
+      - [Banco de Dados](#banco-de-dados-1)
+      - [Aplicação - GLPI](#aplicação---glpi)
+    - [Configurando Proxy Reverso](#configurando-proxy-reverso)
+    - [Finalização](#finalização)
+    - [Segurança](#segurança)
+      - [Pasta de Instalção](#pasta-de-instalção)
+  - [Guia de Usuário](#guia-de-usuário)
 
-  $ git clone https://github.com/nutecuneal/glpi-deploy.git
-  ```
+## Requisitos e Dependências
 
-#### Docker:
-  - Docker é um plataforma que usa virtualização a nível de aplicação/"Sistema Operacional" para entregar softwares empacotados, chamados de containers.
-  - Instale o Docker e o Docker-Compose
-  - [Docker: Guia de Uso e instalação](https://docs.docker.com/desktop/).
+- [Docker e Docker-Compose](https://docs.docker.com/)
 
-#### GLPI:
-  - Software de gerenciamento de serviços.
-  - [GLPI Website](http://glpi-project.org/) (para baixar versão atual).
-  - [Repositório do Github](https://github.com/glpi-project/glpi/releases ) (Todas as versões - Recomendado).
-  - Versões Testadas: 10.0.2.
+- [GLPI Website](http://glpi-project.org/) (para baixar versão atual).
 
-### Preparação
+- [Repositório no Github](https://github.com/glpi-project/glpi/releases) (Todas as versões - Recomendado).
 
-#### Docker:
-- Certifique-se que a aplicação está executando.
-- ```bash
-  # Em algumas distribuições Linux.
+- Versões Testadas: 10.0.2 (INSEGURA), 10.0.5.
 
-  # Para verificar se o Docker está executando.
-  $ sudo systemctl status docker.service
-  
-  # Para iniciar o Docker (caso necessário).
-  $ sudo systemctl start docker.service
+<br>
 
-  # Para fazer o Docker iniciar junto com o Sistema Operacional.
-  $ sudo systemctl enable docker.service  
-  ```
+## Instalação
 
-#### GLPI:
-- Extraia o arquivo *glpi-{version}.tgz*. Copie a pasta extraída para dentro de "*$path1*/glpi-deploy/main". Onde *\$path1* é o caminho para pasta *glpi-deploy* clonada na seção [Projeto GLPI-Deploy](#Projeto-GLPI-Deploy).
+### Preparação de Ambiente
 
-## Primeira Instalação
+1. Baixe o GLPI através dos links disponibilizados.
+2. Extraia o arquivo ***glpi-{version}.tgz***.
+3. Copie a pasta extraída para ***$(pwd)/glpi-deployer/app***. 
 
-```bash
-# Entre na pasta glpi-deploy
+Obs.: ***$(pwd)*** simboliza um caminho qualquer na máquina do usuário. Ajuste-o de acordo com suas preferências/necessidades.
 
-$ cd $path1/glpi-deploy
-```
-
-### Criação de Diretórios
-
-```bash
-$ mkdir -p $path2/lib/glpi/{config,data,database}
-$ mkdir -p $path2/lib/glpi/data/{_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads,_cache}
-$ mkdir -p $path3/log/glpi
-
-# Copiando arquivo de configuração de diretórios da aplicação
-$ cp main/configs/php/local_define.php $path2/lib/glpi/config
-
-# utilize "sudo" no início dos comandos caso o path requeira permissão de admin.
-```
-- **Um possível valor para *\$path2* e *\$path3* é "/var" ou qualquer outro caminho de sua preferência.**
-
-### Construção dos Containers Docker
+### Estrutura de Diretório
 
 #### Banco de Dados
 
-- Altere os seguintes arquivos (pasta "database") inserindo os valores preterido seguindo os modelos.
-  
 ```bash
-# Em ".env"
+# Crie os diretórios.
 
-# Senha do usuário root
-MARIADB_ROOT_PASSWORD
-
-# Hosts permitidos para acesso ao usuário root. Pode ser ou "%" ou "localhost" (sem aspas). Padrão "localhost".  
-MARIADB_ROOT_HOST
-
-# Nome do usuário que será utilizado na aplicação do "GLPI". 
-MARIADB_USER
-
-# Senha do usuário
-MARIADB_PASSWORD
+# Dir. Dados
+$ mkdir $(pwd)/lib-mysql
 ```
+Sugestão (no Linux):
+  - Dir. Dados: */var/lib/mysqlglpi*
+
+#### Aplicação
 
 ```bash
-# Em ".grant.sql"
+# Crie os diretórios.
 
-#Linhas 15 e 23
-... TO 'test'@'%' IDENTIFIED BY 'test'; 
+# Dir. Config
+$ mkdir $(pwd)/etc-glpi
 
-## Substitua 'test' em ...['test'@'%']... pelo valor inserido em MARIADB_USER
+# Dir. Dados
+$ mkdir -p $(pwd)/lib-glpi/{_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads,_cache}
 
-## Substitua 'test' em ...[IDENTIFIED BY 'test']... pelo valor inserido em MARIADB_PASSWORD
-
-## Ao configurar a aplicação o banco de deve ser inserido como "db_glpi". Caso queira utilizar outro nome substitua o termo "db_glpi" na linha 23 pelo de sua preferência.
+# Dir. Log
+$ $(pwd)/log-glpi
 ```
 
-#### Docker
+Sugestão (no Linux):
+  - Dir. Config: */etc/glpi*
+  - Dir. Dados: */var/lib/glpi*
+  - Dir. Log: */var/log/glpi*
 
-```dockerfile
-#  Em "docker-compose.yml"
+```bash
+# Copie o arquivo "local_define.php" para o diretório "config".
 
-# Service: glpi
+$ cp $(pwd)/glpi-deployer/app/config-app/local_define.php $(pwd)/etc-glpi
+```
 
-## Altere o valor "5000" pela porta escolhida para a aplicação GLPI.
+```
+# app/.dockerignore
+
+# Comente a linha que ignora a pasta de instalação do GLPI.
+
+# Antes
+**/glpi/install
+
+# Depois
+# **/glpi/install
+```
+
+### Docker-Compose
+
+#### Rede
+
+```yml
+# docker-compose.yml (Em networks.glpi-net.ipam)
+# Altere os valores caso necessário. 
+
+config:
+# Endereço da rede
+  - subnet: '172.18.0.0/28'
+# Gateway da rede
+    gateway: 172.18.0.1
+```
+
+#### Portas
+
+```yml
+# docker-compose.yml (Em services.app)
+
+# Comente/Descomente (e/ou altere) as portas/serviços que você deseja oferecer.
+
+# Não recomendado.
+# Recomendado usar um proxy reverso para expor à internet (com HTTPS).
+
 ports:
-  - "5000:80" 
+# Porta para HTTP.
+  - '80:80'
+```
 
-## Altere o valor "~/glpi-storage/" pelos caminhos definidos no tópico "Criação de Diretórios"
+```yml
+# docker-compose.yml (Em services.db)
+
+# Comente/Descomente (e/ou altere) as portas/serviços que você deseja oferecer.
+
+# Cuidado, isso pode expor seu banco para outros hosts.
+# Só altere se realmente for desejado.
+
+ports:
+# Bind "localhost" com o container.
+# Porta padrão Mysql/MariaDB 
+  - '127.0.0.1:3306:3306'
+```
+
+#### Variáveis de Ambiente (Environment)
+
+```yml
+# docker-compose.yml (Em services.db)
+
+environment:
+# Senha do usuário root
+  - MARIADB_ROOT_PASSWORD=rootpass
+# Host do root. "localhost" ou ["%"(não recomendado)]
+  - MARIADB_ROOT_HOST=localhost
+# Nome do usuário criado 
+  - MARIADB_USER=username
+# Senha do usuário
+  - MARIADB_PASSWORD=userpass
+```
+
+#### Volumes
+
+```yml
+# docker-compose.yml (Em services.app)
+# Aponte para as pastas criadas anteriormente.
+
+# Antes
 volumes:
-  - ~/glpi-storage/lib/glpi/config:/etc/glpi
-  - ~/glpi-storage/lib/glpi/data:/var/lib/glpi
-  - ~/glpi-storage/log/glpi:/var/log/glpi
+  - '$(pwd)/etc_glpi:/etc/glpi'
+  - '$(pwd)/lib_glpi:/var/lib/glpi'
+  - '$(pwd)/log_glpi:/var/log/glpi'
 
-## Descomente a linha (remova o "#" no início da linha)
-## (Antes)
-"# - ./main/glpi/install:/var/www/html/install"
-## (Depois)
-"- ./main/glpi/install:/var/www/html/install"
-
-
-# Service: glpi_db
-## Faça as mesmas alterações.
+# Depois (exemplo)
 volumes:
-  - ~/glpi-storage/lib/glpi/database:/var/lib/mysql
+  - '/etc/glpi:/etc/glpi'
+  - '/var/lib/glpi:/var/lib/glpi'
+  - '/var/log/glpi:/var/log/glpi'
 ```
 
-```bash
-# No terminal construa a imagem
+```yml
+# docker-compose.yml (Em services.db)
+# Aponte para as pastas criadas anteriormente.
 
-$ sudo docker-compose -f docker-compose.yml up
+# Antes
+volumes:
+  - '$(pwd)/lib-mysql:/var/lib/mysql'
+
+# Depois (exemplo)
+volumes:
+  - '/var/lib/mysqlglpi:/var/lib/mysql'
 ```
 
-### Configurando a Aplicação
+### Executando Docker-Compose
 
 ```bash
-# Para verificar se os containers estão executando
-$ sudo docker container ls
+$ docker-compose -f docker-compose.yml up
 ```
 
-#### GLPI - Banco de Dados
+### Configuração de Permissões
+
+#### Banco de Dados
+
+```sql
+/*
+ db/grant.sql
+
+ Linhas 15 e 23 (Todos os locais).
+*/
+
+... TO 'username'@'%' IDENTIFIED BY 'userpass'; 
+
+```
+
+1. Substitua ***username*** pelo valor inserido em ***MARIADB_USER***.
+2. Substitua ***userpass*** pelo valor inserido em ***MARIADB_PASSWORD***.
+3. Ao configurar a aplicação o banco de deve ser inserido como ***db_glpi***. Caso opte por utilizar outro nome substitua o termo ***db_glpi*** na linha 23 pelo de sua preferência.
+
+Acesse o banco de dados utilizando uma aplicação gráfica ou via terminal.
 
 ```bash
-# Acesse o container através do comando
-$ sudo docker exec -it glpi-db /bin/bash
+# Via terminal
 
-# Entre no SGBD (com o usuário root e sua senha)
+# Entre no container
+$ docker exec -it glpi-db /bin/bash
+
+# Entre no SGBD (com o usuário root e senha root)
 $ mariadb -u root -p
 
-# Agora, no terminal cole - um por vez - os dois comando do arquivo "grant.sql". Certifique-se de ter feitos as alterações mencionadas no início do tutorial.
+# Agora cole - um por vez - os dois comando.
+
+# Certifique-se de ter feitos as alterações.
 ```
 
-#### GLPI - Aplicação
-```bash
-# Entre no container através do comando
-$ sudo docker exec -it glpi /bin/bash
+#### Aplicação - GLPI
 
-# Execute
+```bash
+# Via terminal
+
+# Entre no container
+$ docker exec -it glpi-app /bin/bash
+
+# Execute 
 $ chown -R www-data:www-data /etc/glpi 
 $ chown -R www-data:www-data /var/lib/glpi
 $ chown -R www-data:www-data /var/log/glpi
 ```
 
-Informações para acesso local:
-  - GLPI: 172.16.1.3:80 ou "localhost:portaGLPI" ou "ipHost:portaGLPI"
-  - GLPI Banco de Dados: 172.16.1.2:3306 ou "localhost:3306"
+### Configurando Proxy Reverso
 
-Agora, em seu navegador acesse a aplicação GLPI. Faça a configuração seguindo o [manual de instalação](https://glpi-install.readthedocs.io/en/latest/install/wizard.html).
+> Para adicionar uma camada a mais de segurança recomendamos usar alguma aplicação de proxy reverso, como por exemplo o Nginx. Isso permite esconder o servidor Apache do usuário final além de tornar mais fácil e escalável configurar coisas como HTTPS, redirecionamentos, etc. [Guia para instalação de um Proxy Manager](https://github.com/nutecuneal/proxy-manager-deployer).
 
-<br>
+### Finalização
+
+1. A partir de seu navegador acesse o domínio/IP e a porta configurada no servidor.
+2. Siga o [*Intall-Wizard GLPI*](https://glpi-install.readthedocs.io/en/latest/install/wizard.html) para concluir o processo.
+
+Dica.: você poderá localizar os containers na rede através de seus IPs, para inspecionar isso use o comando "***docker inspect CONTAINER_NAME***". Ou simplesmene use o "***alias***" do container - "**glpi-app**" e/ou "**glpi-db**" - como se fosse um **Hostname/DNS**.
+
+### Segurança
+
+#### Pasta de Instalção
 
 Por motivo de segurança recomenda-se remover a pasta de instalação de dentro do código da aplicação. Por isso, faça:
 
-
-```dockerfile
-#  Em "docker-compose.yml"
-# Service: glpi
-## Comente a linha (inserindo "#"
-## (Antes)
-"- ./main/glpi/install:/var/www/html/install"
-## (Depois)
-"# - ./main/glpi/install:/var/www/html/install"
 ```
+# app/.dockerignore
+
+# Descomente a linha que ignora a pasta de instalação do GLPI.
+
+# Antes
+#**/glpi/install
+
+# Depois
+**/glpi/install
+```
+
 ```bash
 # Remova os containers
-$ sudo docker rm -f glpi glpi-db
+$ docker rm -f glpi-app glpi-db
 
-# Remova o imagem
-$ sudo docker rmi -f glpi-deploy-glpi
+# Remova a imagem
+$ docker rmi -f glpi-deployer-glpi
 
-# Execute os containers novamente
-$ sudo docker-compose -f docker-compose.yml up
+# Remova os caches de build
+$ docker builder prune -a
+
+# Execute o Docker-Compose novamente
+$ docker-compose -f docker-compose.yml up
 ```
+## Guia de Usuário
 
-# Intalação com backup (Migração/Restauração)
-
-## OBSERVAÇÕES
-
-Dentro do GLPI:
-
-- Autenticação e destinatário.
-- Adicionar Remetente.
-- `Geral:Assistência:Permitir abertura de chamados anônimos`
-- `Configurar:notifições:notifições`
-
-Ações automáticas:
-
-- mailgate *(Puxa os chamados que vem do email)*
-- queuednotification *(Envio da fila de notificação)*
-
-Tarefa automática:
-
-- Periodo de execução: É o horário em que a tarefa pode ser executada, ex: de 0 horas até 24 horas, daquele dia.
-
-TO-DO:
-
-**Verificar o modelo de resposta ao usuário do chamado**.
+> [Clique aqui para ir ao guia](./README.usersguide.md)

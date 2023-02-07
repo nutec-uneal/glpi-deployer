@@ -1,0 +1,3 @@
+# m h  dom mon dow   command
+
+*1 * * * * www-data /usr/local/bin/php /var/www/html/front/cron.php
