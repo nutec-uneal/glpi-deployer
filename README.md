@@ -25,6 +25,7 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
     - [Finalização](#finalização)
     - [Segurança](#segurança)
       - [Pasta de Instalção](#pasta-de-instalção)
+  - [Guia de Usuário](#guia-de-usuário)
 
 ## Requisitos e Dependências
 
@@ -288,3 +289,6 @@ $ docker builder prune -a
 # Execute o Docker-Compose novamente
 $ docker-compose -f docker-compose.yml up
 ```
+## Guia de Usuário
+
+> [Clique aqui para ir ao guia](./README.usersguide.md)
