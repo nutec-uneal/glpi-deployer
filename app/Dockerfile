@@ -1,60 +1,51 @@
-FROM php:8.1-apache
+FROM php:8.2-fpm-alpine3.18
 
-EXPOSE 80
+ARG GLPI_SOURCECODE_URL=https://github.com/glpi-project/glpi/releases/download/10.0.7/glpi-10.0.7.tgz
+
+# install-php-extensions download link
+ARG INSTALL_PHP_EXT_URL=https://github.com/mlocati/docker-php-extension-installer/releases/download/2.1.16/install-php-extensions
+
+# Config path "PHP" 
+ARG PHP_CONF_PATH=/usr/local/etc
+
+# User and Group ID
+ARG PUID=1024
+ARG PGID=1024
 
 # Install system apps
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install cron supervisor -y
+RUN apk update
 
 # PHP EXTENSIONS (dependencies)
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
-    /usr/local/bin/
-
+ADD ${INSTALL_PHP_EXT_URL} /usr/local/bin
 RUN chmod +x /usr/local/bin/install-php-extensions
 
-## Required
-RUN install-php-extensions gd xdebug mysqli intl
-## Optional 
-RUN install-php-extensions ldap xmlrpc apcu exif bz2 zip opcache
+RUN install-php-extensions gd \
+    xdebug \
+    mysqli \
+    intl \
+    ldap \
+    xmlrpc \
+    apcu \
+    exif \
+    bz2 \
+    zip \
+    opcache
 
-## Config: parameters ".ini"
+RUN addgroup -g ${PGID} app && \
+    adduser -u ${PUID} -G ${PGID} -DH -g applications -s /bin/sh app && \
+    mkdir -m 754 /etc/glpi /var/lib/glpi /var/log/glpi && \
+    chown -R app:app /etc/glpi /var/lib/glpi /var/log/glpi
 
-### Config: OPCache
-RUN echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+COPY configs/php/php.ini ${PHP_CONF_PATH}/php/php.ini
 
-### Config: "php.ini" mode (default "production", alternative "development")
-RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+RUN echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \
+    sed -e 's/^;?[ ]*session.cookie_httponly[ ]*=.*/session.cookie_httponly = on/' -i /usr/local/etc/php/php.ini
 
-RUN sed -e 's/session.cookie_httponly =.*/session.cookie_httponly = on/' -i /usr/local/etc/php/php.ini
+ADD ${GLPI_SOURCECODE_URL} /tmp
+RUN tar -xf /tmp/glpi-10.0.7.tgz -C /tmp && \
+    mv /tmp/glpi/* /var/www/html
 
-### Config: Apache
-COPY config-apache2/sites-available/glpi.domain.conf /etc/apache2/sites-available/
-
-RUN rm /etc/apache2/sites-enabled/*
-RUN a2ensite glpi.domain.conf
-
-RUN a2enmod remoteip
-
-# Copy GLPI app to container
-COPY glpi/ /var/www/html
-
-# Config: supervisord
-RUN mkdir -p /var/log/supervisor
-COPY configs/supervisord.conf /etc/supervisord.conf
-
-# Config: cron
-COPY configs/glpi-task-cron /etc/cron.d
-RUN chmod 600 /etc/cron.d/glpi-task-cron
-RUN crontab /etc/cron.d/glpi-task-cron
-
-# Config: GLPI data folders
-RUN mkdir /etc/glpi
-RUN mkdir /var/lib/glpi
-RUN mkdir /var/log/glpi
-
-# Config: set app files
-COPY config-app/downstream.php /var/www/html/inc
+COPY config/app/downstream.php /var/www/html/inc
 
 # Config: files permission
 RUN chown -R www-data:www-data /var/www/html/config
@@ -62,4 +53,4 @@ RUN chown -R www-data:www-data /var/www/html/marketplace
 
 WORKDIR /var/www/html
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+EXPOSE 80
