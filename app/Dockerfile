@@ -31,26 +31,32 @@ RUN install-php-extensions gd \
     zip \
     opcache
 
-RUN addgroup -g ${PGID} app && \
-    adduser -u ${PUID} -G ${PGID} -DH -g applications -s /bin/sh app && \
-    mkdir -m 754 /etc/glpi /var/lib/glpi /var/log/glpi && \
-    chown -R app:app /etc/glpi /var/lib/glpi /var/log/glpi
-
-COPY configs/php/php.ini ${PHP_CONF_PATH}/php/php.ini
-
-RUN echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \
-    sed -e 's/^;?[ ]*session.cookie_httponly[ ]*=.*/session.cookie_httponly = on/' -i /usr/local/etc/php/php.ini
-
-ADD ${GLPI_SOURCECODE_URL} /tmp
-RUN tar -xf /tmp/glpi-10.0.7.tgz -C /tmp && \
-    mv /tmp/glpi/* /var/www/html
-
-COPY config/app/downstream.php /var/www/html/inc
-
-# Config: files permission
-RUN chown -R www-data:www-data /var/www/html/config
-RUN chown -R www-data:www-data /var/www/html/marketplace
 
 WORKDIR /var/www/html
 
+RUN rm -rf ${PHP_CONF_PATH}/php-fpm.d/*
+
+ADD ${GLPI_SOURCECODE_URL} /tmp
+RUN tar -xf /tmp/glpi*.tgz -C /tmp && \
+    mv /tmp/glpi/* ./
+
+COPY configs/app/local_define.php /etc/glpi
+COPY config/app/downstream.php ./inc
+COPY configs/php/php.ini ${PHP_CONF_PATH}/php
+COPY configs/php/php-fpm.conf ${PHP_CONF_PATH}
+COPY configs/php/php-fpm.d/*.conf ${PHP_CONF_PATH}/php-fpm.d
+
+RUN addgroup -g ${PGID} app && \
+    adduser -u ${PUID} -G ${PGID} -DH -g applications -s /bin/sh app && \
+    mkdir -m 754 /run/php /var/lib/glpi /var/log/glpi /var/log/php-fpm && \
+    chmod -R 754 ./ && \
+    chown -R app:app ./ /run/php /etc/glpi /var/lib/glpi /var/log/glpi /var/log/php-fpm ./ && \
+    echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini && \
+    sed -e 's/^;?[ ]*session.cookie_httponly[ ]*=.*/session.cookie_httponly = on/' -i ${PHP_CONF_PATH}/php/php.ini
+
+RUN rm -rf /tmp/*
+
+#USER app
+
 EXPOSE 80
+VOLUME [ "/var/www/html", "/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", " /var/log/php-fpm" ]
