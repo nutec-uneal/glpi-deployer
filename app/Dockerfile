@@ -51,8 +51,7 @@ RUN addgroup -g ${PGID} app && \
     mkdir -m 754 /run/php /var/lib/glpi /var/log/glpi /var/log/php-fpm && \
     chmod -R 754 ./ && \
     chown -R app:app ./ /run/php /etc/glpi /var/lib/glpi /var/log/glpi /var/log/php-fpm ./ && \
-    echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini && \
-    sed -e 's/^;?[ ]*session.cookie_httponly[ ]*=.*/session.cookie_httponly = on/' -i ${PHP_CONF_PATH}/php/php.ini
+    echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini &&
 
 RUN rm -rf /tmp/*
 
