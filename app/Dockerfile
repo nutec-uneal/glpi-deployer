@@ -57,5 +57,5 @@ RUN rm -rf /tmp/*
 
 #USER app
 
-EXPOSE 80
-VOLUME [ "/var/www/html", "/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", " /var/log/php-fpm" ]
+EXPOSE 9000
+VOLUME [ "/var/www/html", "/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", "/var/log/php-fpm" ]
