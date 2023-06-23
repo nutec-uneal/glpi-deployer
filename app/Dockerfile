@@ -13,7 +13,8 @@ ARG PUID=1024
 ARG PGID=1024
 
 # Install system apps
-RUN apk update
+RUN apk update && \
+    apk add fcgi
 
 # PHP EXTENSIONS (dependencies)
 ADD ${INSTALL_PHP_EXT_URL} /usr/local/bin
