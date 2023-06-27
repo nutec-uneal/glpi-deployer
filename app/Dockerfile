@@ -1,65 +1,65 @@
 FROM php:8.1-apache
 
-EXPOSE 80
+ARG GLPI_SOURCECODE_URL=glpi-10.0.7.tgz
 
-# Install system apps
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install cron supervisor -y
+# install-php-extensions download link
+ARG INSTALL_PHP_EXT_URL=https://github.com/mlocati/docker-php-extension-installer/releases/download/2.1.16/install-php-extensions
+
+# Config path "PHP" 
+ARG PHP_CONF_PATH=/usr/local/etc
+
+# User and Group ID
+ARG PUID=1024
+ARG PGID=1024
+
+RUN apt-get update && \
+    apt-get install cron supervisor -y
 
 # PHP EXTENSIONS (dependencies)
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
-    /usr/local/bin/
-
+ADD ${INSTALL_PHP_EXT_URL} /usr/local/bin
 RUN chmod +x /usr/local/bin/install-php-extensions
 
-## Required
-RUN install-php-extensions gd xdebug mysqli intl
-## Optional 
-RUN install-php-extensions ldap xmlrpc apcu exif bz2 zip opcache
+RUN install-php-extensions gd \
+    xdebug \
+    mysqli \
+    intl \
+    ldap \
+    xmlrpc \
+    apcu \
+    exif \
+    bz2 \
+    zip \
+    opcache
 
-## Config: parameters ".ini"
+RUN rm -rf /etc/apache2/sites-enabled/* /etc/apache2/sites-available/*
 
-### Config: OPCache
-RUN echo "opcache.memory_consumption=256" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+WORKDIR /var/www/html
 
-### Config: "php.ini" mode (default "production", alternative "development")
-RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+ADD ${GLPI_SOURCECODE_URL} /tmp
+RUN mv /tmp/glpi/* ./
 
-RUN sed -e 's/session.cookie_httponly =.*/session.cookie_httponly = on/' -i /usr/local/etc/php/php.ini
+COPY configs/app/downstream.php ./inc
+COPY configs/php/php.ini ${PHP_CONF_PATH}/php
+COPY configs/apache/sites-available/*.conf /etc/apache2/sites-available
 
-### Config: Apache
-COPY config-apache2/sites-available/glpi.domain.conf /etc/apache2/sites-available/
+RUN groupadd -g ${PGID} app && \
+    useradd -u ${PUID} -g app -M -c applications -s /bin/bash app && \
+    mkdir -m 754 /etc/glpi /var/lib/glpi /var/log/glpi && \
+    chmod -R 754 ./ && \
+    chown -R app:app ./ /etc/glpi /var/lib/glpi /var/log/glpi && \
+    echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
 
-RUN rm /etc/apache2/sites-enabled/*
+
+
+
+RUN rm -rf /tmp/*
+
+
 RUN a2ensite glpi.domain.conf
 
 RUN a2enmod remoteip
 
-# Copy GLPI app to container
-COPY glpi/ /var/www/html
 
-# Config: supervisord
-RUN mkdir -p /var/log/supervisor
-COPY configs/supervisord.conf /etc/supervisord.conf
-
-# Config: cron
-COPY configs/glpi-task-cron /etc/cron.d
-RUN chmod 600 /etc/cron.d/glpi-task-cron
-RUN crontab /etc/cron.d/glpi-task-cron
-
-# Config: GLPI data folders
-RUN mkdir /etc/glpi
-RUN mkdir /var/lib/glpi
-RUN mkdir /var/log/glpi
-
-# Config: set app files
-COPY config-app/downstream.php /var/www/html/inc
-
-# Config: files permission
-RUN chown -R www-data:www-data /var/www/html/config
-RUN chown -R www-data:www-data /var/www/html/marketplace
-
-WORKDIR /var/www/html
+EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
