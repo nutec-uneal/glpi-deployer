@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine3.18
+FROM php:8.2-apache-bookworm
 
 ARG GLPI_SOURCECODE_URL=glpi-10.0.7.tgz
 
@@ -13,7 +13,7 @@ ARG PUID=1024
 ARG PGID=1024
 
 # Install system apps
-RUN apt-get update
+RUN apt-get update -y
 
 # PHP EXTENSIONS (dependencies)
 ADD ${INSTALL_PHP_EXT_URL} /usr/local/bin
@@ -50,7 +50,7 @@ RUN groupadd -g ${PGID} app && \
     echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
 
 RUN a2ensite glpi.domain.conf
-RUN a2ensite glpi.domain-ssl.conf
+#RUN a2ensite glpi.domain-ssl.conf
 
 RUN a2enmod remoteip
 
