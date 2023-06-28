@@ -44,9 +44,9 @@ COPY configs/apache/sites-available/*.conf /etc/apache2/sites-available
 
 RUN groupadd -g ${PGID} app && \
     useradd -u ${PUID} -g app -M -c applications -s /bin/bash app && \
-    mkdir -m 754 /etc/glpi /var/lib/glpi /var/log/glpi && \
-    chmod -R 754 ./ && \
-    chown -R app:app ./ /etc/glpi /var/lib/glpi /var/log/glpi && \
+    mkdir -m 755 /etc/glpi /var/lib/glpi /var/log/glpi && \
+    chmod -R 755 ./ && \
+    chown -R app:app ./ /etc/glpi /var/lib/glpi /var/log/glpi /var/log/apache2 && \
     echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
 
 RUN a2ensite glpi.domain.conf
@@ -60,4 +60,4 @@ EXPOSE 80 443
 
 #USER app
 
-VOLUME ["/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", "/var/log/php-fpm" ]
+VOLUME ["/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", "/var/log/apache2" ]
