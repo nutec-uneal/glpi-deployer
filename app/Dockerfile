@@ -12,8 +12,8 @@ ARG PHP_CONF_PATH=/usr/local/etc
 ARG PUID=1024
 ARG PGID=1024
 
-RUN apt-get update && \
-    apt-get install cron supervisor -y
+# Install system apps
+RUN apt-get update
 
 # PHP EXTENSIONS (dependencies)
 ADD ${INSTALL_PHP_EXT_URL} /usr/local/bin
