@@ -50,7 +50,6 @@ RUN groupadd -g ${PGID} app && \
     echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
 
 RUN a2ensite glpi.domain.conf
-#RUN a2ensite glpi.domain-ssl.conf
 
 RUN a2enmod remoteip
 
