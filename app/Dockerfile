@@ -55,7 +55,7 @@ RUN a2enmod remoteip
 
 RUN rm -rf /tmp/*
 
-EXPOSE 80 443
+EXPOSE 80
 
 #USER app
 
