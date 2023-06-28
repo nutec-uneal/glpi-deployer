@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.2-fpm-alpine3.18
 
 ARG GLPI_SOURCECODE_URL=glpi-10.0.7.tgz
 
@@ -49,17 +49,15 @@ RUN groupadd -g ${PGID} app && \
     chown -R app:app ./ /etc/glpi /var/lib/glpi /var/log/glpi && \
     echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
 
-
-
-
-RUN rm -rf /tmp/*
-
-
 RUN a2ensite glpi.domain.conf
+RUN a2ensite glpi.domain-ssl.conf
 
 RUN a2enmod remoteip
 
+RUN rm -rf /tmp/*
 
-EXPOSE 80
+EXPOSE 80 443
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+#USER app
+
+VOLUME ["/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", "/var/log/php-fpm" ]
