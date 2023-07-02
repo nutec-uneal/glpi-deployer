@@ -1,4 +1,4 @@
-FROM php:8.2-apache-bookworm
+FROM php:8.2.7-apache-bookworm
 
 ARG GLPI_SOURCECODE_URL=glpi-10.0.7.tgz
 
