@@ -36,7 +36,8 @@ RUN rm -rf /etc/apache2/sites-enabled/* /etc/apache2/sites-available/*
 WORKDIR /var/www/html
 
 ADD ${GLPI_SOURCECODE_URL} /tmp
-RUN mv /tmp/glpi/* ./
+RUN ([ -d /tmp/glpi ] || tar -xf /tmp/glpi*.tgz -C /tmp) && \
+    mv /tmp/glpi/* ./
 
 COPY configs/app/downstream.php ./inc
 COPY configs/php/php.ini ${PHP_CONF_PATH}/php
