@@ -60,8 +60,11 @@ RUN a2enmod remoteip
 
 RUN rm -rf /tmp/*
 
+
+USER app
+
 EXPOSE 80
 
-#USER app
+VOLUME ["/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", "/var/log/apache2"]
 
-VOLUME ["/var/www/html/marketplace", "/etc/glpi", "/var/lib/glpi", "/var/log/glpi", "/var/log/apache2" ]
+CMD ["apache2-foreground"]
