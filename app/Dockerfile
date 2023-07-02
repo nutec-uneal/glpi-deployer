@@ -31,7 +31,9 @@ RUN install-php-extensions gd \
     zip \
     opcache
 
-RUN rm -rf /etc/apache2/sites-enabled/* /etc/apache2/sites-available/*
+RUN rm -rf /etc/apache2/sites-enabled/* \
+    /etc/apache2/sites-available/* \
+    /var/log/apache2/*
 
 WORKDIR /var/www/html
 
@@ -44,10 +46,12 @@ COPY configs/php/php.ini ${PHP_CONF_PATH}/php
 COPY configs/apache/sites-available/*.conf /etc/apache2/sites-available
 
 RUN groupadd -g ${PGID} app && \
-    useradd -u ${PUID} -g app -M -c applications -s /bin/bash app && \
+    useradd -u ${PUID} -g app -G www-data -M -c applications -s /bin/bash app && \
     mkdir -m 755 /etc/glpi /var/lib/glpi /var/log/glpi && \
     chmod -R 755 ./ && \
-    chown -R app:app ./ /etc/glpi /var/lib/glpi /var/log/glpi /var/log/apache2 && \
+    chown -R app:app ./ /etc/glpi /var/lib/glpi /var/log/glpi && \
+    sed -e "s/^: \${APACHE_RUN_USER:=www-data}/: \${APACHE_RUN_USER:=app}/" -i /etc/apache2/envvars && \
+    sed -e "s/^: \${APACHE_RUN_GROUP:=www-data}/: \${APACHE_RUN_GROUP:=app}/" -i /etc/apache2/envvars && \
     echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
 
 RUN a2ensite glpi.domain.conf
