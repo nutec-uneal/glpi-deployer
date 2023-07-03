@@ -7,7 +7,3 @@
 .dockerignore
 docker-compose*
 Dockerfile
-
-# Directories glpi
-**/glpi/install
-
