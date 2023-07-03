@@ -1,8 +1,9 @@
 FROM php:8.2.7-apache-bookworm
 
-ARG GLPI_SOURCECODE_URL=glpi-10.0.7.tgz
+# GLP URI (file, Link)
+ARG GLPI_SOURCECODE_URI=glpi-10.0.7.tgz
 
-# install-php-extensions download link
+# install-php-extensions URL
 ARG INSTALL_PHP_EXT_URL=https://github.com/mlocati/docker-php-extension-installer/releases/download/2.1.16/install-php-extensions
 
 # Config path "PHP" 
@@ -12,7 +13,7 @@ ARG PHP_CONF_PATH=/usr/local/etc
 ARG PUID=1024
 ARG PGID=1024
 
-# Install system apps
+# Install and update apps
 RUN apt-get update -y
 
 # PHP EXTENSIONS (dependencies)
@@ -37,7 +38,7 @@ RUN rm -rf /etc/apache2/sites-enabled/* \
 
 WORKDIR /var/www/html
 
-ADD ${GLPI_SOURCECODE_URL} /tmp
+ADD ${GLPI_SOURCECODE_URI} /tmp
 RUN ([ -d /tmp/glpi ] || tar -xf /tmp/glpi*.tgz -C /tmp) && \
     mv /tmp/glpi/* ./
 
