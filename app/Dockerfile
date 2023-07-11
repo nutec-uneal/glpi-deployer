@@ -42,6 +42,9 @@ ADD ${GLPI_SOURCECODE_URI} /tmp
 RUN ([ -d /tmp/glpi ] || tar -xf /tmp/glpi*.tgz -C /tmp) && \
     mv /tmp/glpi/* ./
 
+RUN mkdir /utils && \
+    mv /var/www/html/install /utils
+
 COPY configs/app/downstream.php ./inc
 COPY configs/php/php.ini ${PHP_CONF_PATH}/php
 COPY configs/apache/sites-available/*.conf /etc/apache2/sites-available
@@ -49,8 +52,8 @@ COPY configs/apache/sites-available/*.conf /etc/apache2/sites-available
 RUN groupadd -g ${PGID} app && \
     useradd -u ${PUID} -g app -G www-data -M -c applications -s /bin/bash app && \
     mkdir -m 755 /etc/glpi /var/lib/glpi /var/log/glpi && \
-    chmod -R 755 ./ && \
-    chown -R app:app ./ /etc/glpi /var/lib/glpi /var/log/glpi && \
+    chmod -R 755 ./ /utils && \
+    chown -R app:app ./ /utils /etc/glpi /var/lib/glpi /var/log/glpi && \
     sed -e "s/^: \${APACHE_RUN_USER:=www-data}/: \${APACHE_RUN_USER:=app}/" -i /etc/apache2/envvars && \
     sed -e "s/^: \${APACHE_RUN_GROUP:=www-data}/: \${APACHE_RUN_GROUP:=app}/" -i /etc/apache2/envvars && \
     echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
