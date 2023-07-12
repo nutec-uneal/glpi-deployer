@@ -3,14 +3,16 @@ version: '3.9'
 services:
   app:
     build:
-      context: './app/'
-    container_name: 'glpi-app'
+      context: ./app/
+    container_name: glpi-app
     #ports:
     # - '80:80'
     volumes:
-      - '$(pwd)/etc_glpi:/etc/glpi'
-      - '$(pwd)/lib_glpi:/var/lib/glpi'
-      - '$(pwd)/log_glpi:/var/log/glpi'
+      - $(pwd)/etc_glpi:/etc/glpi
+      - $(pwd)/lib_glpi:/var/lib/glpi
+      - $(pwd)/log_glpi:/var/log/glpi
+      - $(pwd)/log_apache2:/var/log/apache2
+      - $(pwd)/glpi_marketplace:/var/www/html/marketplace
     networks:
       - glpi-net
     depends_on:
@@ -25,17 +27,18 @@ services:
       start_period: 30s
 
   db:
-    image: 'mariadb:10.9.4'
-    container_name: 'glpi-db'
+    image: mariadb:11.0.2
+    container_name: glpi-db
     #ports:
     #  - '127.0.0.1:3306:3306'
     volumes:
       - '$(pwd)/lib-mysql:/var/lib/mysql'
     environment:
-      - MARIADB_ROOT_PASSWORD=rootpass
+      - MARIADB_ROOT_PASSWORD=
       - MARIADB_ROOT_HOST=localhost
-      - MARIADB_USER=username
-      - MARIADB_PASSWORD=userpass
+      - MARIADB_USER=
+      - MARIADB_PASSWORD=
+      - MARIADB_DATABASE=
     networks:
       - glpi-net
     restart: unless-stopped
@@ -55,9 +58,8 @@ services:
 
 networks:
   glpi-net:
-    name: 'glpi-net'
+    name: glpi-net
     ipam:
       driver: default
       config:
         - subnet: '172.18.0.0/28'
-          gateway: 172.18.0.1
