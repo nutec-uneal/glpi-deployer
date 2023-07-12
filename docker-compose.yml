@@ -4,9 +4,13 @@ services:
   app:
     build:
       context: ./app/
+      args:
+        - GLPI_SOURCECODE_URI=https://github.com/glpi-project/glpi/releases/download/10.0.9/glpi-10.0.9.tgz
+        - PUID=1000
+        - PGID=1000
     container_name: glpi-app
-    #ports:
-    # - '80:80'
+    ports:
+      - '80:80'
     volumes:
       - $(pwd)/etc_glpi:/etc/glpi
       - $(pwd)/lib_glpi:/var/lib/glpi
@@ -32,7 +36,7 @@ services:
     #ports:
     #  - '127.0.0.1:3306:3306'
     volumes:
-      - '$(pwd)/lib-mysql:/var/lib/mysql'
+      - $(pwd)/lib-mysql:/var/lib/mysql
     environment:
       - MARIADB_ROOT_PASSWORD=
       - MARIADB_ROOT_HOST=localhost
