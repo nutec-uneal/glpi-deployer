@@ -6,12 +6,13 @@ ARG GLPI_SOURCECODE_URI=glpi-10.0.7.tgz
 # install-php-extensions URL
 ARG INSTALL_PHP_EXT_URL=https://github.com/mlocati/docker-php-extension-installer/releases/download/2.1.16/install-php-extensions
 
-# Config path "PHP" 
-ARG PHP_CONF_PATH=/usr/local/etc
-
 # User and Group ID
 ARG PUID=1024
 ARG PGID=1024
+
+# Config path "PHP" 
+ARG PHP_CONF_PATH=/usr/local/etc
+
 
 # Install and update apps
 RUN apt-get update -y
