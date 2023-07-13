@@ -4,13 +4,9 @@ services:
   app:
     build:
       context: ./app/
-      args:
-        - GLPI_SOURCECODE_URI=https://github.com/glpi-project/glpi/releases/download/10.0.9/glpi-10.0.9.tgz
-        - PUID=1000
-        - PGID=1000
     container_name: glpi-app
-    ports:
-      - '80:80'
+    #ports:
+    #  - '80:80'
     volumes:
       - $(pwd)/etc_glpi:/etc/glpi
       - $(pwd)/lib_glpi:/var/lib/glpi
@@ -50,7 +46,7 @@ services:
       test:
         [
           'CMD',
-          'mysqladmin',
+          'mariadb-admin',
           'ping',
           '--host=localhost',
           '--user=root'
@@ -66,4 +62,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: '172.18.0.0/28'
+        - subnet: 172.18.0.0/28
