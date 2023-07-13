@@ -1,7 +1,7 @@
 FROM php:8.2.7-apache-bookworm
 
 # GLP URI (file, Link)
-ARG GLPI_SOURCECODE_URI=glpi-10.0.7.tgz
+ARG GLPI_SOURCECODE_URI=glpi-10.0.9.tgz
 
 # install-php-extensions URL
 ARG INSTALL_PHP_EXT_URL=https://github.com/mlocati/docker-php-extension-installer/releases/download/2.1.16/install-php-extensions
