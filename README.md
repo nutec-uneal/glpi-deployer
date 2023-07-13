@@ -17,8 +17,8 @@ O [GLPI](https://glpi-project.org/) é um sistema de código aberto escrito em P
       - [Volumes](#volumes)
       - [Variáveis de Ambiente (Environment)](#variáveis-de-ambiente-environment)
       - [Rede](#rede)
-    - [Executando Docker-Compose](#executando-docker-compose)
-    - [Limitação de Acesso](#limitação-de-acesso)
+    - [Construindo - Docker-Compose](#construindo---docker-compose)
+    - [Mais Configurações](#mais-configurações)
       - [Banco de Dados](#banco-de-dados-1)
     - [Configurando Proxy Reverso](#configurando-proxy-reverso)
     - [Finalização](#finalização)
@@ -161,19 +161,19 @@ volumes:
 # Em "services.db".
 
 environment:
-# Senha do usuário root
+# Senha do usuário root.
   - MARIADB_ROOT_PASSWORD=
 
-# Host do root. "localhost" ou ["%"(não recomendado)]
+# Host do root. "localhost" ou "%" (não recomendado).
   - MARIADB_ROOT_HOST=
 
-# Nome do usuário criado 
+# Nome do usuário criado.
   - MARIADB_USER=
 
-# Senha do usuário
+# Senha do usuário.
   - MARIADB_PASSWORD=
 
-# Banco de dados criado
+# Nome do banco de dados criado.
   - MARIADB_DATABASE= 
 ```
 
@@ -188,13 +188,17 @@ config:
   - subnet: 172.18.0.0/28
 ```
 
-### Executando Docker-Compose
+### Construindo - Docker-Compose
 
 ```bash
+# Execute
+$ docker-compose up
+
+# Ou
 $ docker-compose -f docker-compose.yml up
 ```
 
-### Limitação de Acesso
+### Mais Configurações
 
 #### Banco de Dados
 
@@ -209,9 +213,10 @@ $ docker-compose -f docker-compose.yml up
 
 ```
 
+Detalhes.:
 1. Substitua ***username*** pelo valor inserido em ***MARIADB_USER***.
-2. Substitua ***userpass*** pelo valor inserido em ***MARIADB_PASSWORD***.
-3. Ao configurar a aplicação o banco de deve ser inserido como ***db_glpi***. Caso opte por utilizar outro nome substitua o termo ***db_glpi*** na linha 23 pelo de sua preferência.
+1. Substitua ***userpass*** pelo valor inserido em ***MARIADB_PASSWORD***.
+2. Ao configurar a aplicação o banco de deve ser inserido como ***db_glpi***. Caso opte por utilizar outro nome substitua o termo ***db_glpi*** na linha 23 pelo de sua preferência.
 
 Acesse o banco de dados utilizando uma aplicação gráfica ou via terminal.
 
