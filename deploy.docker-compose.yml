@@ -4,9 +4,6 @@ services:
   app:
     build:
       context: ./app/
-      tags:
-        - "glpinutec:v2.0"
-    container_name: glpi-app
     volumes:
       - $(pwd)/etc_glpi:/etc/glpi
       - $(pwd)/lib_glpi:/var/lib/glpi
@@ -32,14 +29,13 @@ services:
 
   db:
     image: mariadb:11.0.2
-    container_name: glpi-db
     volumes:
       - $(pwd)/lib-mysql:/var/lib/mysql
     environment:
-      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/secglpi-dbroot-passwd
+      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/glpisec-dbroot-passwd
       - MARIADB_ROOT_HOST=localhost
       - MARIADB_USER=
-      - MARIADB_PASSWORD_FILE=/run/secrets/secglpi-dbuser-passwd
+      - MARIADB_PASSWORD_FILE=/run/secrets/glpisec-dbuser-passwd
       - MARIADB_DATABASE=
     networks:
       - glpi-net
