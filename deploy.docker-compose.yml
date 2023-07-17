@@ -1,0 +1,83 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: ./app/
+      tags:
+        - "glpinutec:v2.0"
+    container_name: glpi-app
+    volumes:
+      - $(pwd)/etc_glpi:/etc/glpi
+      - $(pwd)/lib_glpi:/var/lib/glpi
+      - $(pwd)/log_glpi:/var/log/glpi
+      - $(pwd)/log_apache2:/var/log/apache2
+      - $(pwd)/glpi_marketplace:/var/www/html/marketplace
+    networks:
+      - glpi-net
+    restart: unless-stopped
+    healthcheck:
+      test: [ 'CMD', 'curl', '-fs', 'http://localhost' ]
+      interval: 3m
+      timeout: 30s
+      retries: 3
+      start_period: 30s
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 10s
+
+  db:
+    image: mariadb:11.0.2
+    container_name: glpi-db
+    volumes:
+      - $(pwd)/lib-mysql:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/secglpi-dbroot-passwd
+      - MARIADB_ROOT_HOST=localhost
+      - MARIADB_USER=
+      - MARIADB_PASSWORD_FILE=/run/secrets/secglpi-dbuser-passwd
+      - MARIADB_DATABASE=
+    networks:
+      - glpi-net
+    secrets:
+      - glpisec-dbroot-passwd
+      - glpisec-dbuser-passwd
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'mariadb-admin',
+          'ping',
+          '--host=localhost',
+          '--user=root'
+        ]
+      interval: 3m
+      timeout: 30s
+      retries: 3
+      start_period: 30s
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 10s
+
+secrets:
+  glpisec-dbroot-passwd:
+    external: true
+  glpisec-dbuser-passwd:
+    external: true
+
+networks:
+  glpi-net:
+    name: glpi-net
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/28
