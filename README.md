@@ -147,7 +147,7 @@ Opcionalmente pode ser adicionado algumas diretivas personalizadas, como:
 
 args:
 # URL do GLPI (link da internet) ou arquivo.tgz na pasta `app`.
-# Default: glpi-10.0.9.tgz
+# Default: <https://github.com/glpi-project/glpi/releases/download/10.0.9/glpi-10.0.9.tgz>
   - GLPI_SOURCECODE_URI=${URI_VALUE}
 
 # ID do Usuário usado. Default: 1024.
