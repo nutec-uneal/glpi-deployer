@@ -12,7 +12,7 @@ services:
     networks:
       - glpi-net
     healthcheck:
-      test: [ 'CMD', '/healthcheck.sh' ]
+      test: [ 'CMD', 'curl', '-fsI', 'http://localhost' ]
       interval: 30s
       timeout: 15s
       retries: 3
