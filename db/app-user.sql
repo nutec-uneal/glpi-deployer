@@ -1,7 +1,16 @@
+/**
+ * Create a new user.
+ */
 CREATE USER IF NOT EXISTS `$USERNAME`@`$HOST` IDENTIFIED BY '$PASSOWRD';
 
+/**
+ * Assign permission to view existing database.
+ */
 GRANT SHOW DATABASES ON *.* TO `$USERNAME`@`$HOST` IDENTIFIED BY '$PASSOWRD';
 
+/**
+ * Set "roles".
+ */
 GRANT
     ALTER,
     CREATE,
@@ -21,7 +30,10 @@ GRANT
     TRIGGER
 ON $DB_NAME.* TO `$USERNAME`@`$HOST` IDENTIFIED BY '$PASSOWRD';
 
-
+/**
+ * Revoke role to change database structures.
+ * Runs only after creating/updating the database.
+ */
 REVOKE
     ALTER,
     CREATE,
