@@ -2,8 +2,7 @@ version: '3.9'
 
 services:
   app:
-    build:
-      context: ./app/
+    image: glpinutec:v2.0
     volumes:
       - $(pwd)/etc_glpi:/etc/glpi
       - $(pwd)/lib_glpi:/var/lib/glpi
@@ -12,7 +11,6 @@ services:
       - $(pwd)/glpi_marketplace:/var/www/html/marketplace
     networks:
       - glpi-net
-    restart: unless-stopped
     healthcheck:
       test: [ 'CMD', 'curl', '-fs', 'http://localhost' ]
       interval: 3m
@@ -42,7 +40,6 @@ services:
     secrets:
       - glpisec-dbroot-passwd
       - glpisec-dbuser-passwd
-    restart: unless-stopped
     healthcheck:
       test:
         [
