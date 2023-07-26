@@ -12,11 +12,11 @@ services:
     networks:
       - glpi-net
     healthcheck:
-      test: [ 'CMD', '/healthcheck.sh' ]
-      interval: 3m
-      timeout: 30s
+      test: [ 'CMD', 'curl', '-fsI', 'http://localhost' ]
+      interval: 30s
+      timeout: 15s
       retries: 3
-      start_period: 30s
+      start_period: 10s
     deploy:
       mode: global
       restart_policy:
@@ -49,10 +49,10 @@ services:
           '--host=localhost',
           '--user=root'
         ]
-      interval: 3m
-      timeout: 30s
+      interval: 30s
+      timeout: 15s
       retries: 3
-      start_period: 30s
+      start_period: 10s
     deploy:
       mode: global
       restart_policy:

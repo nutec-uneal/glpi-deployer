@@ -1,7 +1,7 @@
 FROM php:8.2.7-apache-bookworm
 
 # GLP URI (file, Link)
-ARG GLPI_SOURCECODE_URI=glpi-10.0.9.tgz
+ARG GLPI_SOURCECODE_URI=https://github.com/glpi-project/glpi/releases/download/10.0.9/glpi-10.0.9.tgz
 
 # install-php-extensions URL
 ARG INSTALL_PHP_EXT_URL=https://github.com/mlocati/docker-php-extension-installer/releases/download/2.1.16/install-php-extensions
@@ -49,12 +49,11 @@ RUN mkdir /utils && \
 COPY configs/app/downstream.php ./inc
 COPY configs/php/php.ini ${PHP_CONF_PATH}/php
 COPY configs/apache/sites-available/*.conf /etc/apache2/sites-available
-COPY scripts/healthcheck.sh /
 
 RUN groupadd -g ${PGID} app && \
     useradd -u ${PUID} -g app -G www-data -M -c applications -s /bin/bash app && \
     mkdir -m 755 /etc/glpi /var/lib/glpi /var/log/glpi && \
-    chmod -R 755 ./ /utils /healthcheck.sh && \
+    chmod -R 755 ./ /utils && \
     chown -R app:app ./ /utils /etc/glpi /var/lib/glpi /var/log/glpi && \
     sed -e "s/^: \${APACHE_RUN_USER:=www-data}/: \${APACHE_RUN_USER:=app}/" -i /etc/apache2/envvars && \
     sed -e "s/^: \${APACHE_RUN_GROUP:=www-data}/: \${APACHE_RUN_GROUP:=app}/" -i /etc/apache2/envvars && \
