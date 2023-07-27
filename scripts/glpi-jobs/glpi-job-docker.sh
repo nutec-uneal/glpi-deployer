@@ -15,7 +15,7 @@ if [[ ${#containers[@]} -le 0 ]]; then
     exit 1
 fi
 
-log_reatime=
+log_realtime=
 failure_counter=0
 
 
@@ -24,7 +24,7 @@ exec_command() {
     
     if [[ ! -z $result ]]; then
         ((failure_counter++))
-        log_reatime+=$(echo "'Command execution error in $actual_container, $result',")
+        log_realtime+=$(echo "'Command execution error in $actual_container, $result',")
     fi
 }
 
@@ -43,9 +43,9 @@ else
 fi
 
 if [[ $containers_array_size -eq $failure_counter ]]; then
-    echo "[$(date)] [ERROR] - [ $log_reatime ]" >&2
+    echo "[$(date)] [ERROR] - [ $log_realtime ]" >&2
     
     exit 1
 fi
 
-echo "[$(date)] [OK] - Successfully executed. Details: [ $log_reatime ]"
+echo "[$(date)] [OK] - Successfully executed. Details: [ $log_realtime ]"
