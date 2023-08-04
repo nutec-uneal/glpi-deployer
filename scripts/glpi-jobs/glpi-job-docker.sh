@@ -20,7 +20,7 @@ failure_counter=0
 
 
 exec_command() {
-    result=$(docker exec -it $actual_container php /var/www/html/front/cron.php 2>&1)
+    result=$(docker exec -i $actual_container php /var/www/html/front/cron.php 2>&1)
     
     if [[ ! -z $result ]]; then
         ((failure_counter++))
