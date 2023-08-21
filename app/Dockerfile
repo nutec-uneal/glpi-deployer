@@ -1,4 +1,4 @@
-FROM php:8.2.7-apache-bookworm
+FROM php:8.2.9-apache-bookworm
 
 # GLP URI (file, Link)
 ARG GLPI_SOURCECODE_URI=https://github.com/glpi-project/glpi/releases/download/10.0.9/glpi-10.0.9.tgz
