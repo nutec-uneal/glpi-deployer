@@ -61,7 +61,7 @@ RUN groupadd -g ${PGID} app && \
 
 RUN a2ensite glpi.domain.conf
 
-RUN a2enmod remoteip
+RUN a2enmod remoteip rewrite
 
 RUN rm -rf /tmp/*
 
