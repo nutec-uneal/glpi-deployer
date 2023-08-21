@@ -10,41 +10,21 @@ ARG INSTALL_PHP_EXT_URL=https://github.com/mlocati/docker-php-extension-installe
 ARG PUID=1024
 ARG PGID=1024
 
-# Config path "PHP" 
+# Set path "PHP" 
 ARG PHP_CONF_PATH=/usr/local/etc
 
 
-# Install and update apps
-RUN apt-get update -y
-
-# PHP EXTENSIONS (dependencies)
 ADD ${INSTALL_PHP_EXT_URL} /usr/local/bin
-RUN chmod +x /usr/local/bin/install-php-extensions
-
-RUN install-php-extensions gd \
-    xdebug \
-    mysqli \
-    intl \
-    ldap \
-    xmlrpc \
-    apcu \
-    exif \
-    bz2 \
-    zip \
-    opcache
-
-RUN rm -rf /etc/apache2/sites-enabled/* \
-    /etc/apache2/sites-available/* \
-    /var/log/apache2/*
+ADD ${GLPI_SOURCECODE_URI} /tmp
 
 WORKDIR /var/www/html
 
-ADD ${GLPI_SOURCECODE_URI} /tmp
-RUN ([ -d /tmp/glpi ] || tar -xf /tmp/glpi*.tgz -C /tmp) && \
-    mv /tmp/glpi/* ./
-
-RUN mkdir /utils && \
-    mv /var/www/html/install /utils
+RUN apt-get update -y && \
+    chmod +x /usr/local/bin/install-php-extensions && \ 
+    install-php-extensions gd xdebug mysqli intl ldap xmlrpc apcu exif bz2 zip opcache && \
+    rm -rf /etc/apache2/sites-enabled/* /etc/apache2/sites-available/* /var/log/apache2/* && \
+    ([ -d /tmp/glpi ] || tar -xf /tmp/glpi*.tgz -C /tmp) && mv /tmp/glpi/* ./ && \
+    mkdir /utils && mv /var/www/html/install /utils
 
 COPY configs/app/downstream.php ./inc
 COPY configs/php/php.ini ${PHP_CONF_PATH}/php
@@ -57,13 +37,10 @@ RUN groupadd -g ${PGID} app && \
     chown -R app:app ./ /utils /etc/glpi /var/lib/glpi /var/log/glpi && \
     sed -e "s/^: \${APACHE_RUN_USER:=www-data}/: \${APACHE_RUN_USER:=app}/" -i /etc/apache2/envvars && \
     sed -e "s/^: \${APACHE_RUN_GROUP:=www-data}/: \${APACHE_RUN_GROUP:=app}/" -i /etc/apache2/envvars && \
-    echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini
-
-RUN a2ensite glpi.domain.conf
-
-RUN a2enmod remoteip rewrite
-
-RUN rm -rf /tmp/*
+    echo "opcache.memory_consumption=256" >> ${PHP_CONF_PATH}/php/conf.d/docker-php-ext-opcache.ini && \
+    a2enmod remoteip rewrite && \
+    a2ensite glpi.domain.conf && \
+    rm -rf /tmp/*
 
 
 USER app
